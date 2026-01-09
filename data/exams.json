@@ -1,0 +1,55 @@
+{
+    "exams": [
+        {
+            "id": "exam-1",
+            "title": "Question 1: Data Science Pipeline",
+            "year": 2025,
+            "points": 10,
+            "topic": "Introduction",
+            "question": "Describe the main stages of the data science pipeline. For each stage, provide a brief explanation and mention one tool or technique commonly used.",
+            "answer": "**The Data Science Pipeline Stages:**\n\n1. **Problem Definition** - Clearly defining the business problem and objectives. Tool: Stakeholder interviews, requirements documents.\n\n2. **Data Collection** - Gathering relevant data from various sources. Tools: SQL queries, Web scraping (BeautifulSoup), APIs.\n\n3. **Data Cleaning** - Handling missing values, removing duplicates, fixing inconsistencies. Tool: pandas (dropna, fillna, drop_duplicates).\n\n4. **Exploratory Data Analysis** - Understanding data distributions, relationships, and patterns. Tools: matplotlib, seaborn, pandas describe().\n\n5. **Feature Engineering** - Creating new features, encoding categorical variables, scaling. Tools: sklearn preprocessing, feature selection.\n\n6. **Modeling** - Training machine learning models. Tools: scikit-learn, TensorFlow, XGBoost.\n\n7. **Evaluation** - Assessing model performance using appropriate metrics. Tools: sklearn metrics (accuracy, MSE, F1-score).\n\n8. **Deployment** - Making the model available for use. Tools: Flask, Docker, cloud platforms (AWS, GCP).",
+            "keywords": ["pipeline", "data science", "workflow", "stages", "EDA", "modeling"]
+        },
+        {
+            "id": "exam-2",
+            "title": "Question 2: Missing Value Strategies",
+            "year": 2025,
+            "points": 8,
+            "topic": "Data Wrangling",
+            "question": "You have a dataset with 15% missing values in the 'income' column. Discuss three different strategies to handle these missing values and explain when each would be appropriate.",
+            "answer": "**Three Strategies for Handling Missing Values:**\n\n**1. Deletion (Listwise/Pairwise):**\n- Remove rows with missing values: `df.dropna()`\n- Appropriate when: Missing data is MCAR (Missing Completely at Random), and the proportion is small (<5%)\n- Drawback: Reduces sample size, may introduce bias if data is not MCAR\n- With 15% missing, this would lose significant data\n\n**2. Mean/Median Imputation:**\n- Replace missing values with column mean/median: `df['income'].fillna(df['income'].median())`\n- Appropriate when: Data is MCAR, want to preserve sample size\n- Use median for skewed data or outliers present\n- Drawback: Reduces variance, distorts relationships between variables\n\n**3. Model-based Imputation (e.g., KNN):**\n- Use other features to predict missing values\n- `from sklearn.impute import KNNImputer`\n- Appropriate when: Missing values have relationships with other features (MAR - Missing at Random)\n- Better preserves data relationships\n- Drawback: More computationally expensive\n\n**Recommendation for 15%:** Use KNN imputation or multiple imputation (MICE) since the proportion is significant and deletion would lose too much data.",
+            "keywords": ["missing values", "imputation", "deletion", "mean", "median", "KNN", "MCAR"]
+        },
+        {
+            "id": "exam-3",
+            "title": "Question 3: Overfitting and Regularization",
+            "year": 2024,
+            "points": 12,
+            "topic": "Machine Learning",
+            "question": "a) Explain what overfitting is and how you can detect it.\nb) Compare Ridge and Lasso regularization. When would you prefer one over the other?\nc) Write Python code to implement Ridge regression with cross-validation to find the optimal alpha.",
+            "answer": "**a) Overfitting:**\nOverfitting occurs when a model learns the training data too well, including noise and random fluctuations, resulting in poor generalization to new data.\n\n**Detection methods:**\n- Large gap between training and test performance\n- Training accuracy/R² is high, but test accuracy/R² is much lower\n- Model performs worse as complexity increases on validation set\n- Use learning curves to visualize\n\n**b) Ridge vs Lasso:**\n\n**Ridge (L2):**\n- Adds penalty: λ * Σβ²\n- Shrinks coefficients but never exactly to zero\n- Prefer when: All features may be relevant, multicollinearity present\n\n**Lasso (L1):**\n- Adds penalty: λ * Σ|β|\n- Can shrink coefficients exactly to zero\n- Prefer when: Feature selection is desired, sparse models needed\n\n**c) Code:**\n```python\nfrom sklearn.linear_model import RidgeCV\nfrom sklearn.model_selection import train_test_split\nimport numpy as np\n\n# Define alphas to try\nalphas = np.logspace(-3, 3, 100)\n\n# Create and fit RidgeCV\nridge_cv = RidgeCV(alphas=alphas, cv=5)\nridge_cv.fit(X_train, y_train)\n\n# Best alpha\nprint(f\"Optimal alpha: {ridge_cv.alpha_}\")\nprint(f\"Test R²: {ridge_cv.score(X_test, y_test)}\")\n```",
+            "keywords": ["overfitting", "regularization", "ridge", "lasso", "cross validation", "alpha", "L1", "L2"]
+        },
+        {
+            "id": "exam-4",
+            "title": "Question 4: Train-Test Split",
+            "year": 2024,
+            "points": 6,
+            "topic": "Machine Learning",
+            "question": "Why is it important to split data into training and test sets? What is cross-validation and when should you use it instead of a simple train-test split?",
+            "answer": "**Importance of Train-Test Split:**\n\n1. **Unbiased Evaluation:** Testing on unseen data gives a realistic estimate of model performance on new data\n2. **Detecting Overfitting:** If training performance >> test performance, model is overfitting\n3. **Model Selection:** Helps choose between different models based on generalization ability\n\n**Cross-Validation (CV):**\n- Data is split into K folds\n- Model is trained K times, each time using K-1 folds for training and 1 fold for validation\n- Final score is the average across all K evaluations\n\n**When to use CV instead of simple split:**\n\n1. **Small datasets:** When you can't afford to lose 20-30% of data for testing\n2. **High variance in results:** Simple split may give unreliable estimates\n3. **Hyperparameter tuning:** Need robust performance estimates to select best parameters\n4. **Model comparison:** More reliable comparison between different algorithms\n\n**Common choices:**\n- K=5 or K=10 for most cases\n- Stratified K-Fold for imbalanced classification\n- Leave-One-Out for very small datasets",
+            "keywords": ["train test split", "cross validation", "k-fold", "overfitting", "evaluation", "generalization"]
+        },
+        {
+            "id": "exam-5",
+            "title": "Question 5: Regression Metrics Interpretation",
+            "year": 2023,
+            "points": 8,
+            "topic": "Machine Learning",
+            "question": "A regression model has the following metrics:\n- MSE: 25\n- RMSE: 5\n- MAE: 4\n- R²: 0.85\n\nInterpret each metric. What do these values tell you about the model's performance?",
+            "answer": "**Interpretation of Metrics:**\n\n**MSE = 25:**\n- Average of squared prediction errors\n- Higher values indicate larger errors\n- Penalizes large errors more than small ones\n- Not in same units as target (squared units)\n\n**RMSE = 5:**\n- Square root of MSE, same units as target variable\n- On average, predictions are off by about 5 units\n- If target is in dollars, predictions deviate by ~$5 on average\n- Sensitive to outliers (like MSE)\n\n**MAE = 4:**\n- Average absolute error, same units as target\n- Predictions are off by 4 units on average\n- Less sensitive to outliers than RMSE\n- MAE < RMSE suggests some larger errors exist (since RMSE penalizes them more)\n\n**R² = 0.85:**\n- Model explains 85% of the variance in the target variable\n- This is quite good for many applications\n- 15% of variance is unexplained (due to missing features, noise, etc.)\n- Range is 0-1 (can be negative for very poor models)\n\n**Overall Assessment:**\nThe model performs well (85% variance explained). The difference between RMSE (5) and MAE (4) is small, suggesting errors are relatively consistent without extreme outliers. The predictions are reasonably accurate for most applications.",
+            "keywords": ["MSE", "RMSE", "MAE", "R-squared", "interpretation", "metrics", "evaluation"]
+        }
+    ]
+}
+

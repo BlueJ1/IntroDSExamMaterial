@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro DS Exam Prep</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1><i class="fas fa-graduation-cap"></i> Intro DS Exam Prep</h1>
+            <div class="search-container">
+                <input type="text" id="global-search" placeholder="Search everything... (fuzzy matching enabled)">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-section="slides"><i class="fas fa-file-pdf"></i> Lecture Slides</a></li>
+                <li><a href="#" class="nav-link" data-section="notes"><i class="fas fa-sticky-note"></i> Notes</a></li>
+                <li><a href="#" class="nav-link" data-section="exams"><i class="fas fa-question-circle"></i> Past Exams</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section active">
+            <h2>Welcome to Your Exam Prep Hub</h2>
+            <div class="dashboard-grid">
+                <div class="dashboard-card" data-goto="slides">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>Lecture Slides</h3>
+                    <p class="count" id="slides-count">0 slides</p>
+                </div>
+                <div class="dashboard-card" data-goto="notes">
+                    <i class="fas fa-sticky-note"></i>
+                    <h3>Notes</h3>
+                    <p class="count" id="notes-count">0 notes</p>
+                </div>
+                <div class="dashboard-card" data-goto="exams">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Past Exams</h3>
+                    <p class="count" id="exams-count">0 questions</p>
+                </div>
+            </div>
+
+            <div class="quick-search-results" id="quick-search-results">
+                <h3><i class="fas fa-search"></i> Search Results</h3>
+                <div id="search-results-container"></div>
+            </div>
+        </section>
+
+        <!-- Lecture Slides Section -->
+        <section id="slides" class="content-section">
+            <h2><i class="fas fa-file-pdf"></i> Lecture Slides</h2>
+            <div class="filter-bar">
+                <input type="text" id="slides-search" placeholder="Filter slides...">
+                <select id="slides-topic-filter">
+                    <option value="">All Topics</option>
+                </select>
+            </div>
+            <div class="slides-grid" id="slides-container"></div>
+
+            <!-- PDF Viewer Modal -->
+            <div class="modal" id="pdf-modal">
+                <div class="modal-content pdf-viewer">
+                    <div class="modal-header">
+                        <h3 id="pdf-title"></h3>
+                        <button class="close-modal"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="pdf-container">
+                        <iframe id="pdf-iframe" src=""></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notes Section -->
+        <section id="notes" class="content-section">
+            <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+            <div class="filter-bar">
+                <input type="text" id="notes-search" placeholder="Search notes...">
+                <select id="notes-topic-filter">
+                    <option value="">All Topics</option>
+                </select>
+            </div>
+            <div class="notes-list" id="notes-container"></div>
+        </section>
+
+        <!-- Past Exams Section -->
+        <section id="exams" class="content-section">
+            <h2><i class="fas fa-question-circle"></i> Past Exam Questions</h2>
+            <div class="filter-bar">
+                <input type="text" id="exams-search" placeholder="Search questions...">
+                <select id="exams-year-filter">
+                    <option value="">All Years</option>
+                </select>
+                <select id="exams-topic-filter">
+                    <option value="">All Topics</option>
+                </select>
+            </div>
+            <div class="exams-list" id="exams-container"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Exam Prep Hub &copy; 2026 | Good luck with your exam! 🎓</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
+    <script src="js/data-loader.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+

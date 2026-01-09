@@ -1,0 +1,45 @@
+{
+    "slides": [
+        {
+            "id": "slide-1",
+            "title": "Lecture 1 - Introduction to Data Science",
+            "description": "Overview of the course, what is data science, the data science pipeline, tools and technologies",
+            "topic": "Introduction",
+            "pdfPath": "slides/lecture-01-intro.pdf",
+            "keywords": ["data science", "introduction", "pipeline", "overview", "machine learning", "statistics"]
+        },
+        {
+            "id": "slide-2",
+            "title": "Lecture 2 - Data Collection & Cleaning",
+            "description": "Data sources, web scraping, APIs, data cleaning techniques, handling missing values",
+            "topic": "Data Wrangling",
+            "pdfPath": "slides/lecture-02-data-collection.pdf",
+            "keywords": ["data collection", "web scraping", "API", "cleaning", "missing values", "preprocessing"]
+        },
+        {
+            "id": "slide-3",
+            "title": "Lecture 3 - Exploratory Data Analysis",
+            "description": "Descriptive statistics, visualizations, distributions, correlations, outlier detection",
+            "topic": "EDA",
+            "pdfPath": "slides/lecture-03-eda.pdf",
+            "keywords": ["EDA", "visualization", "statistics", "histogram", "scatter plot", "correlation"]
+        },
+        {
+            "id": "slide-4",
+            "title": "Lecture 4 - Machine Learning Fundamentals",
+            "description": "Supervised vs unsupervised learning, training and testing, model evaluation metrics",
+            "topic": "Machine Learning",
+            "pdfPath": "slides/lecture-04-ml-fundamentals.pdf",
+            "keywords": ["machine learning", "supervised", "unsupervised", "training", "testing", "evaluation"]
+        },
+        {
+            "id": "slide-5",
+            "title": "Lecture 5 - Regression",
+            "description": "Linear regression, polynomial regression, regularization (Ridge, Lasso), evaluation metrics",
+            "topic": "Machine Learning",
+            "pdfPath": "slides/lecture-05-regression.pdf",
+            "keywords": ["regression", "linear", "polynomial", "ridge", "lasso", "MSE", "R-squared"]
+        }
+    ]
+}
+

@@ -1,0 +1,10 @@
+Place your PDF lecture slides in this folder.
+
+Each PDF should be referenced in data/slides.json with the correct path.
+
+Example naming convention:
+- lecture-01-intro.pdf
+- lecture-02-data-collection.pdf
+- lecture-03-eda.pdf
+- etc.
+

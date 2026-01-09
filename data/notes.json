@@ -1,0 +1,40 @@
+{
+    "notes": [
+        {
+            "id": "note-1",
+            "title": "Data Science Pipeline Overview",
+            "topic": "Introduction",
+            "content": "The **Data Science Pipeline** consists of the following stages:\n\n1. **Problem Definition** - Understanding the business problem\n2. **Data Collection** - Gathering data from various sources\n3. **Data Cleaning** - Handling missing values, outliers, inconsistencies\n4. **EDA** - Exploratory Data Analysis to understand patterns\n5. **Feature Engineering** - Creating new features from existing data\n6. **Modeling** - Applying ML algorithms\n7. **Evaluation** - Assessing model performance\n8. **Deployment** - Putting the model into production\n\nKey tools: Python (pandas, numpy, scikit-learn), R, SQL, Jupyter Notebooks",
+            "keywords": ["pipeline", "data science", "workflow", "machine learning", "pandas", "numpy"]
+        },
+        {
+            "id": "note-2",
+            "title": "Handling Missing Values",
+            "topic": "Data Wrangling",
+            "content": "**Strategies for handling missing values:**\n\n**1. Deletion:**\n- `df.dropna()` - Remove rows with missing values\n- Only use when missing data is random and small proportion\n\n**2. Imputation:**\n- Mean/Median imputation: `df.fillna(df.mean())`\n- Mode for categorical: `df.fillna(df.mode()[0])`\n- Forward/backward fill: `df.fillna(method='ffill')`\n\n**3. Advanced Methods:**\n- KNN Imputation\n- MICE (Multiple Imputation by Chained Equations)\n- Model-based imputation\n\n**Important:** Always analyze WHY data is missing before choosing a strategy!",
+            "keywords": ["missing values", "imputation", "dropna", "fillna", "NaN", "null", "data cleaning"]
+        },
+        {
+            "id": "note-3",
+            "title": "Train-Test Split and Cross-Validation",
+            "topic": "Machine Learning",
+            "content": "**Train-Test Split:**\n```\nfrom sklearn.model_selection import train_test_split\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n```\n\n**Cross-Validation:**\n- K-Fold CV: Split data into K folds, train on K-1, test on 1, rotate\n- Stratified K-Fold: Preserves class distribution in each fold\n- Leave-One-Out: K = n (number of samples)\n\n```\nfrom sklearn.model_selection import cross_val_score\nscores = cross_val_score(model, X, y, cv=5)\n```\n\n**Why use CV?**\n- More reliable performance estimate\n- Makes better use of limited data\n- Reduces overfitting risk",
+            "keywords": ["train test split", "cross validation", "k-fold", "stratified", "overfitting", "sklearn"]
+        },
+        {
+            "id": "note-4",
+            "title": "Regression Metrics",
+            "topic": "Machine Learning",
+            "content": "**Key Regression Metrics:**\n\n**MSE (Mean Squared Error):**\n- Average of squared differences\n- Penalizes large errors more\n- Formula: MSE = (1/n) * Σ(y - ŷ)²\n\n**RMSE (Root Mean Squared Error):**\n- Square root of MSE\n- Same units as target variable\n- More interpretable than MSE\n\n**MAE (Mean Absolute Error):**\n- Average of absolute differences\n- Robust to outliers\n- Formula: MAE = (1/n) * Σ|y - ŷ|\n\n**R² (Coefficient of Determination):**\n- Proportion of variance explained\n- Range: 0 to 1 (can be negative for bad models)\n- R² = 1 - (SS_res / SS_tot)\n\n**Adjusted R²:**\n- Accounts for number of predictors\n- Use when comparing models with different features",
+            "keywords": ["MSE", "RMSE", "MAE", "R-squared", "metrics", "evaluation", "regression"]
+        },
+        {
+            "id": "note-5",
+            "title": "Regularization - Ridge vs Lasso",
+            "topic": "Machine Learning",
+            "content": "**Regularization** adds a penalty term to prevent overfitting.\n\n**Ridge Regression (L2):**\n- Penalty: λ * Σ(β²)\n- Shrinks coefficients toward zero but never exactly zero\n- Good when all features are relevant\n- `from sklearn.linear_model import Ridge`\n\n**Lasso Regression (L1):**\n- Penalty: λ * Σ|β|\n- Can shrink coefficients to exactly zero\n- Performs feature selection\n- `from sklearn.linear_model import Lasso`\n\n**Elastic Net:**\n- Combines L1 and L2 penalties\n- Best of both worlds\n- `from sklearn.linear_model import ElasticNet`\n\n**Choosing λ (alpha):**\n- Use cross-validation\n- `RidgeCV`, `LassoCV` for automatic selection",
+            "keywords": ["regularization", "ridge", "lasso", "L1", "L2", "elastic net", "overfitting", "feature selection"]
+        }
+    ]
+}
+
