@@ -267,144 +267,109 @@
             "keywords": ["stationary distribution", "equilibrium", "convergence", "eigenvector", "long-run behavior"]
         },
         {
-            "id": "note-pat-1",
-            "title": "Pattern Recognition Defined",
-            "topic": "Pattern Recognition",
-            "content": "**Pattern Recognition** is the automated recognition of regularities and structures in data. It is the core discipline behind machine learning.\n\n**Key Components:**\n1.  **Input:** Raw data (vectors, images, signals).\n2.  **Feature Extraction:** Transforming raw data into a meaningful representation (Feature Vector $x$).\n3.  **Classification/Regression:** Assigning the input to a category (Class $y$) or predicting a continuous value.\n\n**Goal:** To learn a function $f(x)$ that approximates the true relationship between inputs and outputs.",
-            "keywords": ["pattern recognition", "features", "classification", "input vectors", "automated learning"]
-        },
-        {
-            "id": "note-pat-2",
-            "title": "Linear Classifiers",
-            "topic": "Pattern Recognition",
-            "content": "A **Linear Classifier** makes decisions based on a linear combination of the features. \n\n\n**Decision Boundary:**\nFor a binary problem, the boundary is a hyperplane defined by $w^T x + b = 0$.\n-   If $w^T x + b > 0$, predict Class 1.\n-   If $w^T x + b < 0$, predict Class 0 (or -1).\n\n**Examples:**\n-   **Perceptron:** An early algorithm that iteratively updates weights to correct classification errors.\n-   **Support Vector Machine (Linear SVM):** Finds the hyperplane that maximizes the *margin* between classes.",
-            "keywords": ["linear classifier", "hyperplane", "decision boundary", "perceptron", "SVM", "weights"]
-        },
-        {
-            "id": "note-pat-3",
-            "title": "k-Nearest Neighbors (k-NN)",
-            "topic": "Pattern Recognition",
-            "content": "**k-NN** is a non-parametric, instance-based learning algorithm. It does not learn a fixed model weights but stores the training data.\n\n**Algorithm:**\n1.  Receive a new query point $x_q$.\n2.  Find the $k$ training examples closest to $x_q$ (usually Euclidean distance).\n3.  **Vote:** The predicted class is the most common class among the $k$ neighbors.\n\n**Characteristics:**\n-   Simple and effective.\n-   **High computational cost** at prediction time (must search the dataset).\n-   Sensitive to the choice of $k$ (Low $k$ = Overfitting; High $k$ = Underfitting).",
-            "keywords": ["k-NN", "nearest neighbors", "instance-based", "non-parametric", "voting"]
-        },
-        {
-            "id": "note-metric-1",
-            "title": "Train-Test Split",
-            "topic": "Model Evaluation",
-            "content": "To evaluate how well a model **generalizes** to unseen data, we cannot test it on the data it was trained on (this would yield a biased, optimistic score).\n\n**Procedure:**\n1.  **Training Set:** Used to optimize the model parameters.\n2.  **Testing Set:** Held out strictly for evaluation. The model *never* sees this during training.\n\n**Common Splits:** 80/20 or 70/30. \n**Randomization:** It is crucial to shuffle data before splitting to ensure the distribution is consistent across sets.",
-            "keywords": ["train test split", "generalization", "hold-out set", "evaluation", "methodology"]
-        },
-        {
-            "id": "note-metric-2",
-            "title": "The Confusion Matrix",
-            "topic": "Classification Metrics",
-            "content": "A table used to evaluate the performance of a classifier. \n\n**Components (for Binary Classification):**\n-   **True Positive (TP):** Correctly predicted positive.\n-   **True Negative (TN):** Correctly predicted negative.\n-   **False Positive (FP):** Incorrectly predicted positive (Type I Error).\n-   **False Negative (FN):** Incorrectly predicted negative (Type II Error).\n\nFrom these raw counts, we derive metrics like Precision, Recall, and Accuracy.",
-            "keywords": ["confusion matrix", "TP", "FP", "type I error", "type II error", "classification"]
-        },
-        {
-            "id": "note-metric-3",
-            "title": "Precision, Recall, and F1-Score",
-            "topic": "Classification Metrics",
-            "content": "Accuracy ($ \\frac{TP+TN}{Total} $) is misleading if classes are imbalanced (e.g., fraud detection). We use:\n\n1.  **Precision:** $\\frac{TP}{TP + FP}$. Of all predicted positives, how many were actually positive? (Focus: Minimize False Positives).\n2.  **Recall (Sensitivity):** $\\frac{TP}{TP + FN}$. Of all actual positives, how many did we find? (Focus: Minimize False Negatives).\n3.  **F1-Score:** The harmonic mean of Precision and Recall. \n    $$ F1 = 2 \\cdot \\frac{Precision \\cdot Recall}{Precision + Recall} $$\n    Useful when you need a balance between the two.",
-            "keywords": ["precision", "recall", "F1 score", "imbalanced data", "sensitivity"]
-        },
-        {
-            "id": "note-metric-4",
-            "title": "VC Dimension (Vapnik–Chervonenkis)",
-            "topic": "Statistical Learning Theory",
-            "content": "The **VC Dimension** ($d_{VC}$) is a measure of the capacity (complexity) of a hypothesis class $\\mathcal{H}$.\n\n**Definition:**\nIt is the size of the largest set of points that can be **shattered** by $\\mathcal{H}$. \n-   *Shattering* means the model can classify the points in all possible $2^n$ ways (all combinations of labels).\n\n**Examples:**\n-   Linear classifier in 2D: $d_{VC} = 3$.\n-   Linear classifier in $d$ dimensions: $d_{VC} = d + 1$.\n\n**Significance:** Higher VC dimension implies a more complex model, which is more prone to overfitting unless the dataset size $n$ is large enough.",
-            "keywords": ["VC dimension", "shattering", "model capacity", "complexity", "statistical learning theory"]
-        },
-        {
-            "id": "note-metric-5",
-            "title": "Generalization Bounds",
-            "topic": "Statistical Learning Theory",
-            "content": "Theory allows us to bound the probability that the True Risk $R(f)$ is significantly higher than the Empirical Risk $\\hat{R}(f)$.\n\n**Vapnik's Bound:**\n$$ R(f) \\le \\hat{R}(f) + \\sqrt{\\frac{h(\\log(2n/h) + 1) - \\log(\\eta/4)}{n}} $$\nwhere $h$ is the VC dimension and $n$ is sample size.\n\n**Takeaway:**\n-   To guarantee good generalization (low $R(f)$), we need $n$ to be large relative to the VC dimension $h$.\n-   \"Smaller VC-dimension $\\to$ better guarantee\" (for a fixed $n$).",
-            "keywords": ["generalization bound", "true risk", "empirical risk", "bound", "sample complexity"]
-        },
-        {
-            "id": "note-reg-1",
-            "title": "Linear Regression Model",
-            "topic": "Regression",
-            "content": "Linear Regression assumes a linear relationship between input variables $X$ and the output $Y$. \n\n**Model:**\n$$ Y = \\beta_0 + \\beta_1 X_1 + \\dots + \\beta_p X_p + \\epsilon $$\n-   $\\beta$: Coefficients (weights).\n-   $\\epsilon$: Error term (Residual), assumed $\\epsilon \\sim \\mathcal{N}(0, \\sigma^2)$.\n\n**Matrix Form:** $Y = X\\beta + \\epsilon$.",
-            "keywords": ["linear regression", "coefficients", "residuals", "matrix form", "modeling"]
-        },
-        {
-            "id": "note-reg-2",
-            "title": "Ordinary Least Squares (OLS)",
-            "topic": "Regression",
-            "content": "OLS is the method used to estimate the unknown $\\beta$ parameters by minimizing the Sum of Squared Errors (SSE).\n\n**Objective:**\n$$ \\min_{\\beta} \\sum_{i=1}^n (y_i - x_i^T \\beta)^2 = \\min_{\\beta} ||Y - X\\beta||^2 $$\n\n**Closed-Form Solution:**\nBy taking the derivative and setting to zero (Normal Equation):\n$$ \\hat{\\beta} = (X^T X)^{-1} X^T Y $$\nThis provides the optimal coefficients provided $X^T X$ is invertible (no perfect multicollinearity).",
-            "keywords": ["OLS", "least squares", "normal equation", "optimization", "closed-form solution"]
-        },
-        {
-            "id": "note-reg-3",
-            "title": "Polynomial Regression",
-            "topic": "Regression",
-            "content": "When data is non-linear, we can still use linear regression machinery by transforming features.\n\n**Basis Expansion:**\nTransform input $x$ into polynomial features: $\\phi(x) = [1, x, x^2, x^3, \\dots]$.\nThe model becomes linear in terms of these new features:\n$$ y = \\beta_0 + \\beta_1 x + \\beta_2 x^2 + \\dots $$\n\n**Risk:** High-degree polynomials dramatically increase model complexity (and VC dimension), leading to **Runge's phenomenon** or severe overfitting at the edges of the data.",
-            "keywords": ["polynomial regression", "basis expansion", "feature engineering", "non-linear", "complexity"]
-        },
-        {
-            "id": "note-reg-4",
-            "title": "Regression Metrics: MSE and R-Squared",
-            "topic": "Regression",
-            "content": "**Mean Squared Error (MSE):**\nThe average squared difference between predictions and actual values.\n$$ MSE = \\frac{1}{n} \\sum (y_i - \\hat{y}_i)^2 $$\n\n**Coefficient of Determination ($R^2$):**\nRepresents the proportion of variance in the dependent variable explained by the model.\n$$ R^2 = 1 - \\frac{SS_{res}}{SS_{tot}} $$\n-   $R^2 = 1$: Perfect fit.\n-   $R^2 = 0$: Model is no better than predicting the mean.\n-   $R^2 < 0$: Model is worse than just predicting the mean (possible on test sets).",
-            "keywords": ["MSE", "R-squared", "variance explained", "goodness of fit", "residuals"]
-        },
-        {
-            "id": "note-reg-5",
-            "title": "Bias-Variance Tradeoff",
-            "topic": "Model Selection",
-            "content": "The total error of a model can be decomposed into three parts:\n\n$$ E[(y - \\hat{f}(x))^2] = \\text{Bias}^2 + \\text{Variance} + \\text{Irreducible Error} $$\n\n1.  **Bias:** Error due to simplifying assumptions (e.g., fitting a line to a curve). High Bias $\\to$ Underfitting.\n2.  **Variance:** Sensitivity to fluctuations in the training set (e.g., high-degree polynomial). High Variance $\\to$ Overfitting.\n\n**Goal:** Find the sweet spot (optimal complexity) that minimizes the sum of Bias and Variance.",
-            "keywords": ["bias-variance tradeoff", "decomposition", "error analysis", "underfitting", "overfitting"]
-        },
-        {
-            "id": "note-hd-1",
-            "title": "The Curse of Dimensionality",
-            "topic": "High-Dimensional Geometry",
-            "content": "The **Curse of Dimensionality** refers to various phenomena that arise when analyzing and organizing data in high-dimensional spaces that do not occur in low-dimensional settings (like 2D or 3D). [Image of curse of dimensionality volume]\n\n**Key Counter-Intuitive Properties:**\n1.  **Empty Space:** High-dimensional spaces are incredibly sparse. The amount of data required to cover the space grows exponentially with the dimension $d$.\n2.  **Distance Concentration:** As $d \\to \\infty$, the distance between any two random points tends to become equal. This makes distance-based metrics (like Euclidean distance in k-NN) less meaningful.\n3.  **Orthogonality:** Two random vectors in high dimensions are very likely to be nearly orthogonal (perpendicular).",
-            "keywords": ["curse of dimensionality", "sparsity", "distance concentration", "orthogonality", "high-dimensional data"]
-        },
-        {
-            "id": "note-hd-2",
-            "title": "Geometry of Hyperspheres and Hypercubes",
-            "topic": "High-Dimensional Geometry",
-            "content": "Our intuition about volumes fails in high dimensions.\n\n**The Hypersphere:**\n-   The volume of a unit hypersphere is $V_d(r) = \\frac{\\pi^{d/2}}{\\Gamma(d/2 + 1)}r^d$.\n-   Surprisingly, as $d \\to \\infty$, the volume of a unit sphere approaches **0**.\n-   **Volume Concentration:** Almost all of the volume of a high-dimensional ball is contained in a thin shell near its surface (the \"crust\").\n\n**The Hypercube:**\n-   The volume is $1^d = 1$.\n-   The length of the main diagonal is $\\sqrt{d}$. In very high dimensions, the corners of the cube are extremely far from the center, while the \"face\" centers are close (distance 1/2).",
-            "keywords": ["hypersphere", "hypercube", "volume concentration", "geometry", "gamma function"]
-        },
-        {
-            "id": "note-dim-1",
-            "title": "Principal Component Analysis (PCA)",
-            "topic": "Dimensionality Reduction",
-            "content": "**PCA** is a linear dimensionality reduction technique that transforms data into a new coordinate system.\n\n**Objectives (Equivalent):**\n1.  **Maximize Variance:** Find the direction (Principal Component) along which the data varies the most.\n2.  **Minimize Reconstruction Error:** Find the lower-dimensional subspace that minimizes the distance between the original data points and their projections.\n\n**Method:**\nCompute the Eigenvectors of the Covariance Matrix $\\Sigma = \\frac{1}{n} X^T X$ (assuming centered data). The eigenvector with the largest eigenvalue is the first Principal Component.",
-            "keywords": ["PCA", "variance maximization", "reconstruction error", "eigenvectors", "covariance matrix"]
-        },
-        {
-            "id": "note-dim-2",
-            "title": "Singular Value Decomposition (SVD)",
-            "topic": "Dimensionality Reduction",
-            "content": "**SVD** is a fundamental matrix factorization method used in PCA and many other applications.\n\n**Theorem:**\nAny matrix $A$ (size $n \\times m$) can be decomposed into:\n$$ A = U \\Sigma V^T $$\n-   $U$: $n \\times n$ orthogonal matrix (Left Singular Vectors).\n-   $\\Sigma$: $n \\times m$ diagonal matrix containing singular values $\\sigma_i \\ge 0$.\n-   $V$: $m \\times m$ orthogonal matrix (Right Singular Vectors).\n\n**Relation to PCA:**\nThe columns of $V$ are the principal components of $A$. The singular values squared are proportional to the eigenvalues of the covariance matrix.",
-            "keywords": ["SVD", "matrix factorization", "singular values", "eigenvalues", "linear algebra"]
-        },
-        {
-            "id": "note-dim-3",
-            "title": "Random Projections (Johnson-Lindenstrauss)",
-            "topic": "Dimensionality Reduction",
-            "content": "For very large datasets, PCA/SVD can be too computationally expensive. **Random Projections** offer a cheaper alternative.\n\n**Johnson-Lindenstrauss Lemma:**\nPoints in a high-dimensional space can be projected into a randomly selected lower-dimensional subspace (of sufficient size) while approximately preserving the pairwise distances between points.\n\n**Method:**\nMultiply the data matrix $A$ by a random matrix $R$ (e.g., with Gaussian entries). This effectively compresses the data while keeping its structure intact for algorithms like k-NN.",
-            "keywords": ["random projection", "Johnson-Lindenstrauss", "distance preservation", "compression", "random matrix"]
-        },
-        {
-            "id": "note-extra-1",
+            "id": "note-recommender-intro",
             "title": "Recommender Systems",
             "topic": "Collaborative Filtering",
             "content": "**Recommender Systems** aim to predict a user's preference for an item they have not yet interacted with (e.g., Netflix movies, Amazon products).\n\n**The Problem:**\nWe have a sparse matrix $R$ of users and items with many missing entries (unseen items). We want to predict these missing values.\n\n**Collaborative Filtering:**\n-   **User-User:** Find users similar to Alice and recommend what they liked.\n-   **Item-Item:** Find items similar to what Alice previously liked.",
             "keywords": ["recommender systems", "collaborative filtering", "sparse matrix", "preference prediction", "Netflix prize"]
         },
         {
-            "id": "note-extra-2",
+            "id": "note-recommender-matrix-factorization",
             "title": "Matrix Factorization for Recommendations",
             "topic": "Collaborative Filtering",
             "content": "A powerful approach to Recommender Systems, popularized by the Netflix Prize. [Image of matrix factorization recommendation]\n\n**Concept:**\nAssume the user-item rating matrix $R$ (size $U \\times I$) is approximately the product of two lower-rank matrices:\n$$ R \\approx P \\times Q^T $$\n-   $P$ ($U \\times k$): User Preference Matrix (Latent factors for users).\n-   $Q$ ($I \\times k$): Item Feature Matrix (Latent factors for items).\n\n**Training:**\nLearn $P$ and $Q$ by minimizing the squared error on the *observed* ratings, usually via Gradient Descent or Alternating Least Squares (ALS). The dot product $p_u \\cdot q_i$ then predicts the missing rating.",
             "keywords": ["matrix factorization", "latent factors", "ALS", "gradient descent", "predictions"]
+        },
+        {
+            "id": "note-dkw-inequality",
+            "title": "The Dvoretzky-Kiefer-Wolfowitz (DKW) Inequality",
+            "topic": "Fundamentals of Estimation",
+            "content": "A fundamental theorem in non-parametric statistics that bounds the distance between the Empirical Distribution Function (EDF), $\\hat{F}_n(x)$, and the true CDF, $F(x)$.\n\n**Theorem:**\nFor any $\\epsilon > 0$:\n$$ \\mathbb{P}\\left(\\sup_{x} |\\hat{F}_n(x) - F(x)| > \\epsilon\\right) \\le 2e^{-2n\\epsilon^2} $$\n\n**Significance:**\nIt provides a non-asymptotic guarantee (valid for finite $n$) that the empirical distribution converges uniformly to the true distribution. It is essential for constructing confidence bands for CDFs.",
+            "keywords": ["DKW inequality", "empirical distribution", "uniform convergence", "non-parametric", "confidence bands"]
+        },
+        {
+            "id": "note-lcg-box-muller",
+            "title": "Specific Random Number Generators",
+            "topic": "Random Variable Generation",
+            "content": "Specific algorithms for generating pseudo-random numbers and specific distributions.\n\n### Linear Congruential Generators (LCG)\nA simple method to generate uniform pseudo-random numbers:\n$$ X_{n+1} = (aX_n + c) \\mod m $$\nwhere $X_0$ is the seed. The quality depends heavily on the choice of $a, c, m$.\n\n### Box-Muller Transform\nA method to generate Standard Normal random variables from Uniform samples. If $U_1, U_2 \\sim Uniform(0,1)$, then:\n$$ Z_0 = \\sqrt{-2\\ln U_1} \\cos(2\\pi U_2) $$\n$$ Z_1 = \\sqrt{-2\\ln U_1} \\sin(2\\pi U_2) $$\nare independent $N(0,1)$ variables.",
+            "keywords": ["LCG", "Box-Muller", "random number generation", "simulation", "normal distribution"]
+        },
+        {
+            "id": "note-perceptron-algorithm",
+            "title": "The Perceptron Algorithm",
+            "topic": "Pattern Recognition",
+            "content": "An iterative algorithm for learning a linear binary classifier $f(x) = \\text{sign}(w \\cdot x)$.\n\n**Algorithm:**\n1. Initialize weights $w = 0$.\n2. For each training pair $(x_i, y_i)$:\n   - If misclassified ($y_i (w \\cdot x_i) \\le 0$):\n     - Update $w \\leftarrow w + y_i x_i$\n\n**Convergence Theorem:**\nIf the data is **linearly separable** (there exists a $w^*$ such that margin $\\gamma > 0$), the algorithm makes at most $(R/\\gamma)^2$ mistakes and converges in finite time (where $R = \\max ||x_i||$).",
+            "keywords": ["perceptron", "linear classifier", "linear separability", "margin", "convergence"]
+        },
+        {
+            "id": "note-vc-shattering",
+            "title": "VC Dimension and Shattering",
+            "topic": "Complexity and a priori bounds",
+            "content": "A rigorous measure of the complexity of a hypothesis class $\\mathcal{H}$ (e.g., set of classifiers).\n\n### Shattering\nA set of points $x_1, ..., x_n$ is **shattered** by $\\mathcal{H}$ if $\\mathcal{H}$ can produce all $2^n$ possible labelings (assignments of $\\pm 1$) for these points.\n\n### VC Dimension ($d_{VC}$)\nThe maximum number of points that can be shattered by $\\mathcal{H}$.\n- If $d_{VC} < \\infty$, the class is learnable.\n- Example: For linear classifiers in $\\mathbb{R}^d$, $d_{VC} = d + 1$.\n\n### Sauer-Shelah Lemma\nBounds the number of possible labelings (growth function) by a polynomial $O(n^{d_{VC}})$, preventing exponential growth and ensuring generalization.",
+            "keywords": ["VC dimension", "shattering", "Sauer-Shelah", "complexity", "generalization"]
+        },
+        {
+            "id": "note-pagerank",
+            "title": "PageRank and Random Surfers",
+            "topic": "Finite Markov Chains",
+            "content": "An application of Markov Chains to ranking web pages (nodes in a graph).\n\n**The Model:**\nA \"Random Surfer\" moves across the web graph. The **Stationary Distribution** $\\pi$ of this random walk represents the importance (PageRank) of each page.\n\n**Modifications:**\n1. **Sinks:** To handle pages with no outgoing links, the surfer picks a random page.\n2. **Teleportation (Damping):** To ensure irreducibility and aperiodicity (convergence), at each step, with probability $1-\\alpha$, the surfer follows a link, and with probability $\\alpha$, teleports to a random page.\n\nThis ensures a unique stationary distribution exists.",
+            "keywords": ["PageRank", "random surfer", "stationary distribution", "damping factor", "teleportation"]
+        },
+        {
+          "id": "note-sigma-algebra-constructions",
+          "title": "Sigma-Algebras: Intuition and Standard Constructions",
+          "topic": "Probability Theory",
+          "content": "### Why Sigma-Algebras Matter\nSigma-algebras formalize which events are *measurable* and can be assigned probabilities. They encode what information is observable.\n\n### Standard Sigma-Algebras\n1. **Power Set ($2^\\Omega$)**: Used when $\\Omega$ is finite or countable. Every subset is measurable.\n2. **Borel Sigma-Algebra ($\\mathcal{B}(\\mathbb{R}^d)$)**: Generated by half-spaces or open sets. This is the default for real-valued random variables.\n3. **Cylinder Sigma-Algebra**: Used for infinite sequences (e.g. coin tosses, stochastic processes). Events depend on finitely many coordinates.\n\n### Interpretation\nSigma-algebras represent *information*. Conditioning corresponds to restricting to a smaller sigma-algebra.",
+          "keywords": ["sigma-algebra", "Borel", "measurability", "information", "cylinder sets"]
+        },
+        {
+          "id": "note-rv-measurable-functions",
+          "title": "Random Variables as Measurable Functions",
+          "topic": "Random Variables",
+          "content": "A random variable is **not random**—it is a measurable function $X: (\\Omega, \\mathcal{F}) \\to (E, \\mathcal{E})$.\n\n### Key Idea\nRandomness lives in $\\Omega$, not in $X$. The function simply maps outcomes to numbers.\n\n### Why Measurability Matters\nMeasurability ensures that events like $\\{X \\le x\\}$ belong to $\\mathcal{F}$, so probabilities like $\\mathbb{P}(X \\le x)$ are well-defined.\n\nThis perspective is crucial for:\n- Conditional expectation\n- Transformations of random variables\n- Multivariate distributions",
+          "keywords": ["measurable function", "random variable definition", "measurability"]
+        },
+        {
+          "id": "note-rv-transformations",
+          "title": "Transformations of Random Variables",
+          "topic": "Random Variables",
+          "content": "### Discrete Case\nIf $Y = g(X)$ and $X$ is discrete:\n$$\\mathbb{P}(Y=y) = \\sum_{x: g(x)=y} \\mathbb{P}(X=x)$$\n\n### Continuous Case (Change of Variables)\nIf $Y = g(X)$ with invertible and differentiable $g$:\n$$f_Y(y) = f_X(g^{-1}(y)) \\left| \\frac{d}{dy} g^{-1}(y) \\right|$$\n\n### Multivariate Transformations\nUses the **Jacobian determinant**. Frequently tested conceptually, sometimes computationally.\n\nCommon exam trap: forgetting absolute values or assuming invertibility without checking.",
+          "keywords": ["transformation", "change of variables", "Jacobian", "PDF transformation"]
+        },
+        {
+          "id": "note-lp-spaces-norms",
+          "title": "Lp Spaces and Norms",
+          "topic": "Probability Theory",
+          "content": "### Definition\nFor a random variable $X$:\n$$\\|X\\|_p = (\\mathbb{E}[|X|^p])^{1/p}$$\n$L^p$ is the space of random variables with finite $p$-th moment.\n\n### Important Facts\n- $L^2$ is especially important (variance, inner products).\n- $\\|X\\|_p$ is a norm for $p \\ge 1$.\n- If $p \\le q$, then $L^q \\subseteq L^p$ (with caveats).\n\nUsed heavily in convergence proofs and concentration arguments.",
+          "keywords": ["Lp space", "norm", "moments", "L2", "Hilbert space"]
+        },
+        {
+          "id": "note-convergence-implications",
+          "title": "Modes of Convergence: Implications and Non-Implications",
+          "topic": "Limit Theorems",
+          "content": "### Implication Chain\nAlmost sure $\\Rightarrow$ in probability $\\Rightarrow$ in distribution\n\n### What Does NOT Hold\n- Convergence in distribution does NOT imply convergence in probability.\n- Convergence of PDFs does NOT imply convergence of CDFs (and vice versa).\n\n### Exam-Relevant Insight\nMost counterexamples exploit oscillating densities with converging CDFs.\n\nAlways state *which* convergence you are using—this is often graded explicitly.",
+          "keywords": ["convergence", "almost sure", "in probability", "in distribution"]
+        },
+        {
+          "id": "note-subgaussian-subexponential",
+          "title": "Sub-Gaussian and Sub-Exponential Random Variables",
+          "topic": "Concentration of Measure",
+          "content": "### Sub-Gaussian RVs\nTails decay at least as fast as a Gaussian:\n$$\\mathbb{P}(|X| > t) \\le 2\\exp(-ct^2)$$\n\nExamples: bounded RVs, Gaussian RVs.\n\n### Sub-Exponential RVs\nHeavier tails:\n$$\\mathbb{P}(|X| > t) \\le 2\\exp(-ct)$$\n\n### Why This Matters\nDetermines which concentration inequality applies (Hoeffding vs Bernstein).\nOften tested conceptually, not computationally.",
+          "keywords": ["sub-Gaussian", "sub-exponential", "tail bounds", "concentration"]
+        },
+        {
+          "id": "note-bayes-classifier",
+          "title": "Pattern Recognition: Bayes Classifier",
+          "topic": "Machine Learning",
+          "content": "### Bayes Optimal Classifier\nThe classifier minimizing the true risk:\n$$f^*(x) = \\arg\\max_y \\mathbb{P}(Y=y | X=x)$$\n\n### Bayes Risk\nThe minimum achievable risk under the true distribution.\n\n### Key Insight\nNo algorithm can outperform the Bayes classifier *on average*.\nEmpirical methods approximate it using data.\n\nVery exam-relevant concept.",
+          "keywords": ["Bayes classifier", "Bayes risk", "optimal classifier"]
+        },
+        {
+          "id": "note-jl-lemma-statement",
+          "title": "Johnson–Lindenstrauss Lemma (Statement-Level)",
+          "topic": "Dimensionality Reduction",
+          "content": "### Statement (Informal)\nA set of $n$ points in high dimension can be embedded into $O(\\log n / \\varepsilon^2)$ dimensions while preserving pairwise distances up to $(1 \\pm \\varepsilon)$.\n\n### Interpretation\nRandom projections preserve geometry surprisingly well.\n\n### Exam Tip\nYou are *not* expected to prove it, but you must:\n- State it correctly\n- Explain why it works intuitively (concentration of measure)",
+          "keywords": ["Johnson-Lindenstrauss", "random projection", "geometry"]
         }
     ]
 }
