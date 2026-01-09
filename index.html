@@ -21,7 +21,7 @@
                 <li><a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
                 <li><a href="#" class="nav-link" data-section="slides"><i class="fas fa-chalkboard"></i> Lecture Slides</a></li>
                 <li><a href="#" class="nav-link" data-section="notes"><i class="fas fa-sticky-note"></i> Notes</a></li>
-                <li><a href="#" class="nav-link" data-section="exams"><i class="fas fa-question-circle"></i> Past Exams</a></li>
+                <li><a href="#" class="nav-link" data-section="exercises"><i class="fas fa-pencil-alt"></i> Exercises</a></li>
             </ul>
         </nav>
     </header>
@@ -41,10 +41,10 @@
                     <h3>Notes</h3>
                     <p class="count" id="notes-count">0 notes</p>
                 </div>
-                <div class="dashboard-card" data-goto="exams">
-                    <i class="fas fa-question-circle"></i>
-                    <h3>Past Exams</h3>
-                    <p class="count" id="exams-count">0 questions</p>
+                <div class="dashboard-card" data-goto="exercises">
+                    <i class="fas fa-pencil-alt"></i>
+                    <h3>Exercises</h3>
+                    <p class="count" id="exercises-count">0 exercises</p>
                 </div>
             </div>
 
@@ -94,24 +94,24 @@
             <div class="notes-list" id="notes-container"></div>
         </section>
 
-        <!-- Past Exams Section -->
-        <section id="exams" class="content-section">
-            <h2><i class="fas fa-question-circle"></i> Past Exam Questions</h2>
+        <!-- Exercises Section -->
+        <section id="exercises" class="content-section">
+            <h2><i class="fas fa-pencil-alt"></i> Exercises</h2>
             <div class="filter-bar">
-                <input type="text" id="exams-search" placeholder="Search questions...">
-                <select id="exams-year-filter">
+                <input type="text" id="exercises-search" placeholder="Search exercises...">
+                <select id="exercises-year-filter">
                     <option value="">All Years</option>
                 </select>
-                <select id="exams-topic-filter">
+                <select id="exercises-topic-filter">
                     <option value="">All Topics</option>
                 </select>
             </div>
-            <div class="exams-list" id="exams-container"></div>
+            <div class="exercises-list" id="exercises-container"></div>
         </section>
     </main>
 
     <footer>
-        <p>Exam Prep Hub &copy; 2026 | Good luck with your exam! 🎓</p>
+        <p>Good luck, may the odds be ever in your favor! 🌹</p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>

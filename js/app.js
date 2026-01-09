@@ -8,7 +8,7 @@ class App {
         this.currentSection = 'dashboard';
         this.slides = [];
         this.notes = [];
-        this.exams = [];
+        this.exercises = [];
     }
 
     async init() {
@@ -16,10 +16,10 @@ class App {
         const data = await dataLoader.loadAll();
         this.slides = data.slides;
         this.notes = data.notes;
-        this.exams = data.exams;
+        this.exercises = data.exercises;
 
         // Initialize fuzzy search
-        fuzzySearch.initialize(this.slides, this.notes, this.exams);
+        fuzzySearch.initialize(this.slides, this.notes, this.exercises);
 
         // Update dashboard counts
         this.updateDashboardCounts();
@@ -27,7 +27,7 @@ class App {
         // Render initial content
         this.renderSlides(this.slides);
         this.renderNotes(this.notes);
-        this.renderExams(this.exams);
+        this.renderExercises(this.exercises);
 
         // Populate filter dropdowns
         this.populateFilters();
@@ -39,14 +39,14 @@ class App {
     updateDashboardCounts() {
         document.getElementById('slides-count').textContent = `${this.slides.length} slides`;
         document.getElementById('notes-count').textContent = `${this.notes.length} notes`;
-        document.getElementById('exams-count').textContent = `${this.exams.length} questions`;
+        document.getElementById('exercises-count').textContent = `${this.exercises.length} exercises`;
     }
 
     populateFilters() {
         const slideTopics = dataLoader.getSlideTopics();
         const noteTopics = dataLoader.getNoteTopics();
-        const examTopics = dataLoader.getExamTopics();
-        const years = dataLoader.getExamYears();
+        const exerciseTopics = dataLoader.getExerciseTopics();
+        const years = dataLoader.getExerciseYears();
 
         // Slides topic filter
         const slidesTopicFilter = document.getElementById('slides-topic-filter');
@@ -60,16 +60,16 @@ class App {
             notesTopicFilter.innerHTML += `<option value="${topic}">${topic}</option>`;
         });
 
-        // Exams topic filter
-        const examsTopicFilter = document.getElementById('exams-topic-filter');
-        examTopics.forEach(topic => {
-            examsTopicFilter.innerHTML += `<option value="${topic}">${topic}</option>`;
+        // Exercises topic filter
+        const exercisesTopicFilter = document.getElementById('exercises-topic-filter');
+        exerciseTopics.forEach(topic => {
+            exercisesTopicFilter.innerHTML += `<option value="${topic}">${topic}</option>`;
         });
 
-        // Exams year filter
-        const examsYearFilter = document.getElementById('exams-year-filter');
+        // Exercises year filter
+        const exercisesYearFilter = document.getElementById('exercises-year-filter');
         years.forEach(year => {
-            examsYearFilter.innerHTML += `<option value="${year}">${year}</option>`;
+            exercisesYearFilter.innerHTML += `<option value="${year}">${year}</option>`;
         });
     }
 
@@ -104,13 +104,13 @@ class App {
         // Section-specific searches
         this.setupSectionSearch('slides-search', this.filterSlides.bind(this));
         this.setupSectionSearch('notes-search', this.filterNotes.bind(this));
-        this.setupSectionSearch('exams-search', this.filterExams.bind(this));
+        this.setupSectionSearch('exercises-search', this.filterExercises.bind(this));
 
         // Filter dropdowns
         document.getElementById('slides-topic-filter').addEventListener('change', () => this.applyFilters('slides'));
         document.getElementById('notes-topic-filter').addEventListener('change', () => this.applyFilters('notes'));
-        document.getElementById('exams-topic-filter').addEventListener('change', () => this.applyFilters('exams'));
-        document.getElementById('exams-year-filter').addEventListener('change', () => this.applyFilters('exams'));
+        document.getElementById('exercises-topic-filter').addEventListener('change', () => this.applyFilters('exercises'));
+        document.getElementById('exercises-year-filter').addEventListener('change', () => this.applyFilters('exercises'));
 
         // Modal close
         document.querySelector('.close-modal').addEventListener('click', () => {
@@ -182,7 +182,7 @@ class App {
         } else {
             searchResultsContainer.innerHTML = results.slice(0, 10).map(result => {
                 const typeLabel = result.type === 'slide' ? 'Slide' :
-                                  result.type === 'note' ? 'Note' : 'Exam';
+                                  result.type === 'note' ? 'Note' : 'Exercise';
 
                 let excerpt = '';
                 if (result.type === 'slide') {
@@ -221,8 +221,8 @@ class App {
             // Could scroll to specific slide
         } else if (type === 'note') {
             this.navigateTo('notes');
-        } else if (type === 'exam') {
-            this.navigateTo('exams');
+        } else if (type === 'exercise') {
+            this.navigateTo('exercises');
         }
     }
 
@@ -244,13 +244,13 @@ class App {
         this.renderNotes(results);
     }
 
-    filterExams(query) {
+    filterExercises(query) {
         if (!query) {
-            this.applyFilters('exams');
+            this.applyFilters('exercises');
             return;
         }
-        const results = fuzzySearch.searchExams(query);
-        this.renderExams(results);
+        const results = fuzzySearch.searchExercises(query);
+        this.renderExercises(results);
     }
 
     applyFilters(section) {
@@ -282,12 +282,12 @@ class App {
                 filtered = filtered.filter(n => searchIds.has(n.id));
             }
             this.renderNotes(filtered);
-        } else if (section === 'exams') {
-            const topic = document.getElementById('exams-topic-filter').value;
-            const year = document.getElementById('exams-year-filter').value;
-            const query = document.getElementById('exams-search').value;
+        } else if (section === 'exercises') {
+            const topic = document.getElementById('exercises-topic-filter').value;
+            const year = document.getElementById('exercises-year-filter').value;
+            const query = document.getElementById('exercises-search').value;
 
-            let filtered = this.exams;
+            let filtered = this.exercises;
             if (topic) {
                 filtered = filtered.filter(e => e.topic === topic);
             }
@@ -295,11 +295,11 @@ class App {
                 filtered = filtered.filter(e => e.year == year);
             }
             if (query) {
-                const searchResults = fuzzySearch.searchExams(query);
+                const searchResults = fuzzySearch.searchExercises(query);
                 const searchIds = new Set(searchResults.map(r => r.id));
                 filtered = filtered.filter(e => searchIds.has(e.id));
             }
-            this.renderExams(filtered);
+            this.renderExercises(filtered);
         }
     }
 
@@ -397,38 +397,38 @@ class App {
         return formatted;
     }
 
-    renderExams(exams) {
-        const container = document.getElementById('exams-container');
+    renderExercises(exercises) {
+        const container = document.getElementById('exercises-container');
 
-        if (exams.length === 0) {
+        if (exercises.length === 0) {
             container.innerHTML = `
                 <div class="no-results">
-                    <i class="fas fa-question-circle"></i>
-                    <p>No exam questions found</p>
+                    <i class="fas fa-pencil-alt"></i>
+                    <p>No exercises found</p>
                 </div>
             `;
             return;
         }
 
-        container.innerHTML = exams.map((exam, index) => `
-            <div class="exam-card">
-                <div class="exam-header">
-                    <h4>${exam.title}</h4>
-                    <div class="exam-meta">
-                        ${exam.year ? `<span class="exam-year">${exam.year}</span>` : ''}
-                        ${exam.points ? `<span class="exam-points">${exam.points} pts</span>` : ''}
+        container.innerHTML = exercises.map((exercise, index) => `
+            <div class="exercise-card">
+                <div class="exercise-header">
+                    <h4>${exercise.title}</h4>
+                    <div class="exercise-meta">
+                        ${exercise.year ? `<span class="exercise-year">${exercise.year}</span>` : ''}
+                        ${exercise.points ? `<span class="exercise-points">${exercise.points} pts</span>` : ''}
                     </div>
                 </div>
-                <div class="exam-question">${this.formatNoteContent(exam.question)}</div>
-                <div class="exam-answer">
+                <div class="exercise-question">${this.formatNoteContent(exercise.question)}</div>
+                <div class="exercise-answer">
                     <button class="answer-toggle" data-index="${index}">
                         <i class="fas fa-eye"></i> Show Answer
                     </button>
                     <div class="answer-content" id="answer-${index}">
-                        ${this.formatNoteContent(exam.answer)}
+                        ${this.formatNoteContent(exercise.answer)}
                     </div>
                 </div>
-                ${exam.topic ? `<span class="note-topic">${exam.topic}</span>` : ''}
+                ${exercise.topic ? `<span class="note-topic">${exercise.topic}</span>` : ''}
             </div>
         `).join('');
 

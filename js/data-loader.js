@@ -7,27 +7,27 @@ class DataLoader {
     constructor() {
         this.slides = [];
         this.notes = [];
-        this.exams = [];
+        this.exercises = [];
         this.loaded = false;
     }
 
     async loadAll() {
         try {
-            const [slidesData, notesData, examsData] = await Promise.all([
+            const [slidesData, notesData, exercisesData] = await Promise.all([
                 this.loadJSON('data/slides.json'),
                 this.loadJSON('data/notes.json'),
-                this.loadJSON('data/exams.json')
+                this.loadJSON('data/exercises.json')
             ]);
 
             this.slides = slidesData.slides || [];
             this.notes = notesData.notes || [];
-            this.exams = examsData.exams || [];
+            this.exercises = exercisesData.exercises || [];
             this.loaded = true;
 
             return {
                 slides: this.slides,
                 notes: this.notes,
-                exams: this.exams
+                exercises: this.exercises
             };
         } catch (error) {
             console.error('Error loading data:', error);
@@ -35,7 +35,7 @@ class DataLoader {
             return {
                 slides: [],
                 notes: [],
-                exams: []
+                exercises: []
             };
         }
     }
@@ -61,8 +61,8 @@ class DataLoader {
         return this.notes;
     }
 
-    getExams() {
-        return this.exams;
+    getExercises() {
+        return this.exercises;
     }
 
     getAllTopics() {
@@ -76,8 +76,8 @@ class DataLoader {
             if (note.topic) topics.add(note.topic);
         });
 
-        this.exams.forEach(exam => {
-            if (exam.topic) topics.add(exam.topic);
+        this.exercises.forEach(exercise => {
+            if (exercise.topic) topics.add(exercise.topic);
         });
 
         return Array.from(topics).sort();
@@ -99,18 +99,18 @@ class DataLoader {
         return Array.from(topics).sort();
     }
 
-    getExamTopics() {
+    getExerciseTopics() {
         const topics = new Set();
-        this.exams.forEach(exam => {
-            if (exam.topic) topics.add(exam.topic);
+        this.exercises.forEach(exercise => {
+            if (exercise.topic) topics.add(exercise.topic);
         });
         return Array.from(topics).sort();
     }
 
-    getExamYears() {
+    getExerciseYears() {
         const years = new Set();
-        this.exams.forEach(exam => {
-            if (exam.year) years.add(exam.year);
+        this.exercises.forEach(exercise => {
+            if (exercise.year) years.add(exercise.year);
         });
         return Array.from(years).sort((a, b) => b - a);
     }

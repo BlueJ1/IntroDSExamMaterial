@@ -7,14 +7,14 @@ class FuzzySearch {
     constructor() {
         this.fuseSlides = null;
         this.fuseNotes = null;
-        this.fuseExams = null;
+        this.fuseExercises = null;
         this.fuseAll = null;
     }
 
     /**
      * Initialize Fuse.js instances with data
      */
-    initialize(slides, notes, exams) {
+    initialize(slides, notes, exercises) {
         // Fuse.js options for fuzzy matching
         const baseOptions = {
             includeScore: true,
@@ -47,8 +47,8 @@ class FuzzySearch {
             ]
         });
 
-        // Exams search configuration
-        this.fuseExams = new Fuse(exams, {
+        // Exercises search configuration
+        this.fuseExercises = new Fuse(exercises, {
             ...baseOptions,
             keys: [
                 { name: 'title', weight: 2 },
@@ -63,7 +63,7 @@ class FuzzySearch {
         const allItems = [
             ...slides.map(s => ({ ...s, type: 'slide' })),
             ...notes.map(n => ({ ...n, type: 'note' })),
-            ...exams.map(e => ({ ...e, type: 'exam' }))
+            ...exercises.map(e => ({ ...e, type: 'exercise' }))
         ];
 
         this.fuseAll = new Fuse(allItems, {
@@ -117,11 +117,11 @@ class FuzzySearch {
     }
 
     /**
-     * Search only exams
+     * Search only exercises
      */
-    searchExams(query) {
-        if (!query || !this.fuseExams) return [];
-        return this.fuseExams.search(query).map(result => ({
+    searchExercises(query) {
+        if (!query || !this.fuseExercises) return [];
+        return this.fuseExercises.search(query).map(result => ({
             ...result.item,
             score: result.score,
             matches: result.matches
