@@ -83,6 +83,328 @@
             "topic": "High Dimensional Data",
             "content": "### The Curse of Dimensionality\nIntuition from 2D/3D often fails in high $d$. \n- **Volume Concentration**: Most volume of a high-dimensional ball is near the surface (crust).\n- **Orthogonality**: Random vectors in high dimensions are likely to be nearly orthogonal.\n\n### Dimensionality Reduction Techniques\n- **Principal Component Analysis (PCA)**: Projects data onto the directions of maximum variance (eigenvectors of covariance matrix).\n- **Singular Value Decomposition (SVD)**: Factorization $A = U \\Sigma V^T$. Used for PCA, compression, and noise reduction.\n- **Random Projections**: The Johnson-Lindenstrauss lemma states that points can be projected to a lower dimension while approximately preserving pairwise distances, often using random matrices.",
             "keywords": ["high dimension", "PCA", "SVD", "Johnson-Lindenstrauss", "random projection", "curse of dimensionality"]
+        },
+        {
+            "id": "note-concentration-1",
+            "title": "Markov's Inequality",
+            "topic": "Concentration Inequalities",
+            "content": "**Markov's Inequality** provides a loose bound on the probability that a non-negative random variable exceeds a certain value. It relies only on the expectation.\n\n**Theorem:**\nIf $X$ is a non-negative random variable ($X \\ge 0$) and $a > 0$, then:\n$$\\mathbb{P}(X \\ge a) \\le \\frac{\\mathbb{E}[X]}{a}$$\n\n**Key Characteristics:**\n- It is the fundamental building block for deriving tighter inequalities (like Chebyshev).\n- It is loose because it uses very little information about the distribution (only the mean and non-negativity).",
+            "keywords": ["Markov inequality", "concentration", "probability bound", "expectation", "non-negative random variable"]
+        },
+        {
+            "id": "note-concentration-2",
+            "title": "Chebyshev's Inequality",
+            "topic": "Concentration Inequalities",
+            "content": "**Chebyshev's Inequality** improves upon Markov's inequality by incorporating information about the variance. It bounds the deviation of a random variable from its mean.\n\n**Theorem:**\nLet $X$ be a random variable with finite mean $\\mu$ and finite variance $\\sigma^2$. For any $k > 0$:\n$$\\mathbb{P}(|X - \\mu| \\ge k) \\le \\frac{\\sigma^2}{k^2}$$\n\n**Interpretation:**\n- It states that no more than $1/k^2$ of the distribution's values can be more than $k$ standard deviations away from the mean.\n- This applies to *any* distribution with a finite variance, making it very robust but often conservative.",
+            "keywords": ["Chebyshev inequality", "variance", "deviation", "mean", "probability bound"]
+        },
+        {
+            "id": "note-concentration-3",
+            "title": "Hoeffding's Inequality",
+            "topic": "Concentration Inequalities",
+            "content": "**Hoeffding's Inequality** provides a sharp bound for the sum of bounded independent random variables. Unlike Chebyshev (polynomial decay), Hoeffding gives an **exponential decay** in probability.\n\n**Theorem:**\nLet $X_1, \\dots, X_n$ be independent random variables bounded such that $a_i \\le X_i \\le b_i$. Let $S_n = \\sum X_i$. Then for any $t > 0$:\n$$\\mathbb{P}(|S_n - \\mathbb{E}[S_n]| \\ge t) \\le 2\\exp\\left(-\\frac{2t^2}{\\sum_{i=1}^n (b_i - a_i)^2}\\right)$$\n\n**Application:**\nIt is widely used in learning theory to bound the generalization error because bounded loss functions fit the requirement perfectly.",
+            "keywords": ["Hoeffding inequality", "exponential bound", "bounded variables", "learning theory", "sum of variables"]
+        },
+        {
+            "id": "note-concentration-4",
+            "title": "Bennett's and Bernstein's Inequalities",
+            "topic": "Concentration Inequalities",
+            "content": "These inequalities offer improvements over Hoeffding's when the variance of the random variables is small.\n\n**Bennett's Inequality:**\nProvides a bound for independent bounded variables with zero mean. It is tighter than Hoeffding's when the variance $\\sigma^2$ is small compared to the bound $b$.\n\n**Bernstein's Inequality:**\nOften easier to compute than Bennett's. Ideally used when we have bounded variables with small variance. It bounds the probability using both the variance factor (like Chebyshev) and the bound magnitude (like Hoeffding).\n\n**Summary of Utility:**\nIf the variance is large, Hoeffding is sufficient. If the variance is very small, Bennett or Bernstein can provide significantly tighter confidence intervals.",
+            "keywords": ["Bennett inequality", "Bernstein inequality", "variance bound", "confidence interval", "refined bounds"]
+        },
+        {
+            "id": "note-limits-1",
+            "title": "The Sample Mean and LLN",
+            "topic": "Limit Theorems",
+            "content": "The **Sample Mean** is defined as $\\bar{X}_n = \\frac{1}{n} \\sum_{i=1}^n X_i$.\n\n**Law of Large Numbers (LLN):**\nStates that as the sample size $n$ increases, the sample mean converges to the true population mean $\\mu$ (expectation $\\mathbb{E}[X]$).\n\n- **Weak Law (WLLN):** Convergence in probability. $\\lim_{n\\to\\infty} \\mathbb{P}(|\\bar{X}_n - \\mu| > \\epsilon) = 0$.\n- **Strong Law (SLLN):** Almost sure convergence. $\\mathbb{P}(\\lim_{n\\to\\infty} \\bar{X}_n = \\mu) = 1$.\n\n**Requirement:** The expectation $\\mathbb{E}[X]$ must exist. If it does not (e.g., Cauchy distribution), the sample mean will not settle down.",
+            "keywords": ["sample mean", "LLN", "law of large numbers", "weak law", "strong law", "convergence"]
+        },
+        {
+            "id": "note-limits-2",
+            "title": "The Central Limit Theorem (CLT)",
+            "topic": "Limit Theorems",
+            "content": "The **Central Limit Theorem** describes the distributional behavior of the sum (or mean) of independent random variables.\n\n**Theorem:**\nLet $X_1, \\dots, X_n$ be I.I.D. random variables with mean $\\mu$ and finite variance $\\sigma^2$. Then:\n$$ \\sqrt{n} \\left( \\frac{\\bar{X}_n - \\mu}{\\sigma} \\right) \\xrightarrow{d} \\mathcal{N}(0, 1) $$\n\n**Implication:**\nFor large $n$, the distribution of the sample mean is approximately Normal: $\\bar{X}_n \\sim \\mathcal{N}(\\mu, \\sigma^2/n)$.\nThis justifies the use of Gaussian models for noise and errors in many real-world systems.",
+            "keywords": ["CLT", "central limit theorem", "normal distribution", "gaussian", "asymptotic distribution"]
+        },
+        {
+            "id": "note-limits-3",
+            "title": "Convergence Failure: The Cauchy Distribution",
+            "topic": "Limit Theorems",
+            "content": "The **Cauchy Distribution** serves as a critical counter-example in limit theory. \n\n- **PDF:** $f(x) = \\frac{1}{\\pi(1+x^2)}$\n- **Properties:** It has undefined Mean and infinite Variance.\n\n**Consequence:**\nThe Law of Large Numbers and Central Limit Theorem **do not apply**. \nIf $X_i \\sim \\text{Cauchy}$, then the sample mean $\\bar{X}_n$ also follows the same Cauchy distribution, regardless of $n$. It never converges to a single value; it remains volatile.",
+            "keywords": ["Cauchy distribution", "counter-example", "undefined mean", "heavy tails", "non-convergence"]
+        },
+        {
+            "id": "note-risk-1",
+            "title": "Loss Functions",
+            "topic": "Statistical Learning",
+            "content": "A **Loss Function** $L(y, f(x))$ quantifies the cost of predicting $f(x)$ when the true label is $y$.\n\n**Common Types:**\n1.  **0-1 Loss:** $L(y, f(x)) = \\mathbb{1}(y \\neq f(x))$. Used in classification errors.\n2.  **Squared Error Loss:** $L(y, f(x)) = (y - f(x))^2$. Used in regression.\n3.  **Absolute Error Loss:** $L(y, f(x)) = |y - f(x)|$. Robust regression.\n\nThe choice of loss function dictates what property of the conditional distribution $P(Y|X)$ we are estimating (e.g., squared error estimates the conditional mean).",
+            "keywords": ["loss function", "0-1 loss", "squared error", "classification", "regression"]
+        },
+        {
+            "id": "note-risk-2",
+            "title": "True Risk vs. Empirical Risk",
+            "topic": "Risk Analysis",
+            "content": "The goal of learning is to minimize Risk.\n\n**True Risk ($R(f)$):**\nThe expected loss over the *true* underlying data distribution $P(X, Y)$.\n$$R(f) = \\mathbb{E}_{X,Y}[L(Y, f(X))] = \\int L(y, f(x)) dP(x,y)$$\n*Problem:* We cannot calculate this directly because $P(X, Y)$ is unknown.\n\n**Empirical Risk ($\\hat{R}_n(f)$):**\nThe average loss calculated on the observed training dataset $D_n = \\{(x_1, y_1), \\dots, (x_n, y_n)\\}$.\n$$\\hat{R}_n(f) = \\frac{1}{n} \\sum_{i=1}^n L(y_i, f(x_i))$$\n*Strategy:* We use $\\hat{R}_n$ as a proxy for $R$.",
+            "keywords": ["risk", "empirical risk", "true risk", "expected loss", "training error"]
+        },
+        {
+            "id": "note-risk-3",
+            "title": "Empirical Risk Minimization (ERM)",
+            "topic": "Statistical Learning",
+            "content": "**Empirical Risk Minimization (ERM)** is the principle of choosing the function $f^*$ from a hypothesis class $\\mathcal{F}$ that minimizes the empirical risk $\\hat{R}_n(f)$.\n\n$$f^*_n = \\underset{f \\in \\mathcal{F}}{\\text{argmin}} \\frac{1}{n} \\sum_{i=1}^n L(y_i, f(x_i))$$\n\n**Generalization Gap:**\nThe difference between the true risk and empirical risk: $R(f^*_n) - \\hat{R}_n(f^*_n)$. Concentration inequalities (like Hoeffding) are used to bound this gap, ensuring that minimizing empirical risk actually leads to low true risk.",
+            "keywords": ["ERM", "empirical risk minimization", "hypothesis class", "optimization", "generalization gap"]
+        },
+        {
+            "id": "note-risk-4",
+            "title": "Overfitting and Complexity",
+            "topic": "Model Selection",
+            "content": "**Overfitting** occurs when a model learns the noise in the training data rather than the underlying pattern. \n\n- **Symptoms:** Low Empirical Risk ($\\hat{R}_n \\approx 0$) but High True Risk ($R \\gg 0$).\n- **Cause:** The hypothesis class $\\mathcal{F}$ is too complex (e.g., high-degree polynomials) relative to the sample size $n$.\n\n**Solution - Structural Risk Minimization (SRM):**\nAdd a penalty term to the optimization that penalizes complexity.\n$$ \\min_{f \\in \\mathcal{F}} \\left( \\hat{R}_n(f) + \\lambda \\cdot \\text{complexity}(f) \\right) $$\nThis balances the trade-off between fitting the data and keeping the model simple (Regularization).",
+            "keywords": ["overfitting", "regularization", "SRM", "complexity penalty", "bias-variance tradeoff"]
+        },
+        {
+            "id": "note-est-1",
+            "title": "Point Estimation Problem",
+            "topic": "Fundamentals of Estimation",
+            "content": "The **Point Estimation** problem involves estimating an unknown parameter $\\theta^*$ from a statistical model using observed data.\n\n**Components:**\n1.  **Observation:** Data $x$ from a sample space $\\mathcal{X}$.\n2.  **Model:** A family of distributions $\\mathcal{P} = \\{ f(x|\\theta) : \\theta \\in \\Theta \\}$.\n3.  **Parameter Space:** $\\Theta$, the set of all possible values for the parameter.\n4.  **Estimator:** A statistic $\\widehat{\\theta} = g(X)$ that maps data to a guessed parameter value.\n\n**Goal:** Find $\\widehat{\\theta}$ such that it is \"close\" to the true $\\theta^*$.",
+            "keywords": ["point estimation", "parameter space", "statistic", "estimator", "statistical model"]
+        },
+        {
+            "id": "note-est-2",
+            "title": "The Likelihood Function",
+            "topic": "Maximum Likelihood Estimation",
+            "content": "The **Likelihood Function** $L_n(\\theta)$ represents the probability (or density) of observing the given data $X_1, \\dots, X_n$ as a function of the parameter $\\theta$.\n\n**Definition (for I.I.D. data):**\n$$L_n(\\theta; x_1, \\dots, x_n) = \\prod_{i=1}^n f(x_i | \\theta)$$\n\n**Interpretation:**\nIt is **not** a probability distribution over $\\theta$. It indicates how well a specific $\\theta$ explains the observed data. A higher likelihood implies the parameter is more plausible given the data.",
+            "keywords": ["likelihood function", "IID", "plausibility", "product rule", "joint density"]
+        },
+        {
+            "id": "note-est-3",
+            "title": "Log-Likelihood",
+            "topic": "Maximum Likelihood Estimation",
+            "content": "In practice, we maximize the **Log-Likelihood** $l_n(\\theta)$ instead of the raw likelihood. \n\n$$l_n(\\theta) = \\ln L_n(\\theta) = \\sum_{i=1}^n \\ln f(x_i | \\theta)$$\n\n**Advantages:**\n1.  **Numerical Stability:** Avoids underflow errors associated with multiplying many small probabilities.\n2.  **Simplification:** Converts products into sums, which are easier to differentiate when finding maxima.\n3.  **Monotonicity:** Since $\\ln$ is strictly increasing, maximizing $l_n(\\theta)$ yields the same $\\theta$ as maximizing $L_n(\\theta)$.",
+            "keywords": ["log-likelihood", "numerical stability", "optimization", "monotonicity", "summation"]
+        },
+        {
+            "id": "note-est-4",
+            "title": "Maximum Likelihood Estimator (MLE)",
+            "topic": "Maximum Likelihood Estimation",
+            "content": "The **MLE** ($\\widehat{\\theta}_{MLE}$) is the parameter value that maximizes the likelihood function.\n\n$$\\widehat{\\theta}_{MLE} = \\underset{\\theta \\in \\Theta}{\\text{argmax}} \\ L_n(\\theta) = \\underset{\\theta \\in \\Theta}{\\text{argmax}} \\ l_n(\\theta)$$\n\n**Finding the MLE:**\n1.  **Analytically:** Differentiate $l_n(\\theta)$ with respect to $\\theta$, set to 0, and solve (Score Equation).\n2.  **Numerically:** Use optimization algorithms (e.g., Gradient Ascent, Newton-Raphson) if no closed-form solution exists.\n3.  **Grid Search:** Evaluate $L_n(\\theta)$ over a discrete grid of $\\theta$ values (useful for 1D or low-dimensional problems).",
+            "keywords": ["MLE", "argmax", "score equation", "grid search", "numerical optimization"]
+        },
+        {
+            "id": "note-opt-1",
+            "title": "Numerical Optimization in Estimation",
+            "topic": "Optimization",
+            "content": "When analytic solutions for MLE are impossible, we use numerical optimization. \n\n**Techniques:**\n-   **Bounded Minimization:** Algorithms like `scipy.optimize.minimize_scalar` (with method 'bounded') find the minimum of the negative log-likelihood (equivalent to maximizing likelihood) within a specific range $[a, b]$.\n-   **Grid Search:** A brute-force approach. Create a dense array of possible $\\theta$ values, compute the log-likelihood for each, and pick the max. It provides a visualization of the likelihood surface but scales poorly (curse of dimensionality).\n\n**Convexity:** Optimization is reliable if the negative log-likelihood is **convex** (or the likelihood is log-concave), guaranteeing a unique global maximum.",
+            "keywords": ["numerical optimization", "grid search", "scipy", "negative log-likelihood", "convexity"]
+        },
+        {
+            "id": "note-se-1",
+            "title": "Standard Error (SE)",
+            "topic": "Statistical Inference",
+            "content": "The **Standard Error** quantifies the precision of an estimator. It is the standard deviation of the estimator's sampling distribution.\n\n$$SE(\\widehat{\\theta}) = \\sqrt{Var(\\widehat{\\theta})}$$\n\n**Key Insight:**\n-   The estimator $\\widehat{\\theta}$ is a random variable (it changes with every new sample).\n-   The SE tells us how much $\\widehat{\\theta}$ typically deviates from its expected value.\n-   **Inverse Square Root Law:** For many estimators (like the mean), $SE \\propto \\frac{1}{\\sqrt{n}}$. To cut the error in half, you need four times the data.",
+            "keywords": ["standard error", "sampling distribution", "precision", "inverse square root law", "variance"]
+        },
+        {
+            "id": "note-se-2",
+            "title": "Estimating the Standard Error",
+            "topic": "Statistical Inference",
+            "content": "Often, the true Standard Error depends on unknown population parameters (e.g., $SE(\\bar{X}) = \\sigma/\\sqrt{n}$, where $\\sigma$ is unknown). We must estimate it.\n\n**Estimated Standard Error ($\\widehat{SE}$):**\nReplace unknown parameters with their estimates.\n$$\\widehat{SE}(\\bar{X}) = \\frac{s}{\\sqrt{n}}$$\nwhere $s$ is the *sample* standard deviation.\n\n**Bootstrapping:**\nA computational method to estimate SE without formulas. Resample the original data with replacement many times, compute $\\widehat{\\theta}$ for each bootstrap sample, and calculate the standard deviation of these bootstrap estimates.",
+            "keywords": ["estimated standard error", "sample standard deviation", "bootstrapping", "plug-in estimator", "resampling"]
+        },
+        {
+            "id": "note-gen-1",
+            "title": "Inverse Transform Sampling",
+            "topic": "Random Variable Generation",
+            "content": "The **Inverse Transform Sampling** method allows generating random variables with a specific Cumulative Distribution Function (CDF) $F(x)$ using a uniform random generator.\n\n**Algorithm:**\n1. Generate $U \\sim Uniform(0, 1)$.\n2. Compute $X = F^{-1}(U)$.\n3. The resulting $X$ has distribution $F$.\n\n**Proof Intuition:**\n$\\mathbb{P}(X \\le x) = \\mathbb{P}(F^{-1}(U) \\le x) = \\mathbb{P}(U \\le F(x)) = F(x)$ (since $\\mathbb{P}(U \\le u) = u$ for uniform variables).\n\n**Application:**\nIdeally used when the CDF $F$ is invertible (e.g., Exponential distribution: $F(x) = 1 - e^{-\\lambda x} \\implies F^{-1}(u) = -\\frac{1}{\\lambda}\\ln(1-u)$).",
+            "keywords": ["inverse transform", "CDF inversion", "simulation", "exponential distribution", "uniform distribution"]
+        },
+        {
+            "id": "note-gen-2",
+            "title": "Rejection Sampling",
+            "topic": "Random Variable Generation",
+            "content": "A technique used when the target PDF $f(x)$ is difficult to sample from directly or its CDF is not invertible.\n\n**Method:**\n1. Choose a simpler **proposal density** $g(x)$ that we *can* sample from.\n2. Find a constant $M$ such that $f(x) \\le M g(x)$ for all $x$ (Envelope property).\n3. Generate $Y \\sim g(x)$ and $U \\sim Uniform(0, 1)$.\n4. **Accept** $Y$ as a sample from $f(x)$ if $U \\le \\frac{f(Y)}{M g(Y)}$. Otherwise, **Reject** and repeat.\n\n**Efficiency:**\nThe probability of acceptance is $1/M$. Therefore, $M$ should be as close to 1 as possible to avoid wasting computation.",
+            "keywords": ["rejection sampling", "proposal density", "envelope", "acceptance probability", "Monte Carlo"]
+        },
+        {
+            "id": "note-prng-1",
+            "title": "Pseudo-Random Number Generators (PRNG)",
+            "topic": "Computational Statistics",
+            "content": "Computers cannot generate truly random numbers; they generate **Pseudo-Random** sequences determined by an initial value called the **Seed**.\n\n**Linear Congruential Generator (LCG):**\nA classic algorithm defined by the recurrence:\n$$X_{n+1} = (aX_n + c) \\pmod m$$\n- $m$: Modulus (defines the maximum range).\n- $a$: Multiplier.\n- $c$: Increment.\n- $X_0$: Seed.\n\n**Properties:**\n- **Period:** The sequence eventually repeats. A good PRNG has a period close to $m$.\n- **Sensitivity:** The quality depends heavily on the choice of $a, c, m$. Poor choices lead to obvious patterns.",
+            "keywords": ["PRNG", "LCG", "seed", "determinism", "modulus", "period"]
+        },
+        {
+            "id": "note-prng-2",
+            "title": "Middle-Square Method",
+            "topic": "Computational Statistics",
+            "content": "An early PRNG proposed by John von Neumann.\n\n**Algorithm:**\n1. Take an $n$-digit number (Seed).\n2. Square it to get a $2n$-digit number.\n3. Extract the middle $n$ digits to form the next number.\n\n**Flaws:**\nIt often converges quickly to short cycles or zero (e.g., $00^2 = 0000 \\to 00$). It is useful for historical context but not for modern simulations.",
+            "keywords": ["middle-square", "von Neumann", "historical algorithms", "simulation"]
+        },
+        {
+            "id": "note-mc-1",
+            "title": "Markov Chain Definition",
+            "topic": "Stochastic Processes",
+            "content": "A **Markov Chain** is a stochastic process $X_0, X_1, X_2, \\dots$ taking values in a countable state space $S$.\n\n**The Markov Property (Memorylessness):**\nThe future state depends *only* on the current state, not on the sequence of events that preceded it.\n$$ \\mathbb{P}(X_{n+1} = j \\mid X_n = i, X_{n-1} = i_{n-1}, \\dots) = \\mathbb{P}(X_{n+1} = j \\mid X_n = i) $$\n\nThis conditional probability $P_{ij}$ is called the **transition probability** from state $i$ to state $j$.",
+            "keywords": ["Markov property", "memoryless", "transition probability", "state space", "stochastic process"]
+        },
+        {
+            "id": "note-mc-2",
+            "title": "Transition Matrix and Graphs",
+            "topic": "Stochastic Processes",
+            "content": "A Markov chain is often represented by a **Transition Matrix** $P$ where the entry $P_{ij}$ is the probability of moving from $i$ to $j$.\n- **Stochastic Matrix:** Each row sums to 1 ($\\sum_j P_{ij} = 1$).\n\n**State Transition Diagram:**\nA directed graph where nodes are states and edges represent non-zero transition probabilities. It helps visualize the connectivity and flow of the chain.",
+            "keywords": ["transition matrix", "directed graph", "stochastic matrix", "visualization", "nodes and edges"]
+        },
+        {
+            "id": "note-mc-3",
+            "title": "n-Step Transitions and Marginals",
+            "topic": "Stochastic Processes",
+            "content": "We can calculate the probability of being in state $j$ after $n$ steps starting from $i$, denoted $P_{ij}^{(n)}$.\n\n**Chapman-Kolmogorov Equation:**\nIn matrix form, the $n$-step transition matrix is simply the $n$-th power of the 1-step matrix:\n$$ P^{(n)} = P^n $$\n\n**Marginal Distribution:**\nIf the initial distribution over states is a row vector $\\pi_0$, the distribution at time $n$ is:\n$$ \\pi_n = \\pi_0 P^n $$",
+            "keywords": ["matrix power", "Chapman-Kolmogorov", "marginal distribution", "trajectory", "evolution"]
+        },
+        {
+            "id": "note-mc-4",
+            "title": "Stationary Distribution",
+            "topic": "Stochastic Processes",
+            "content": "A distribution $\\pi^*$ is **Stationary** (or Invariant) if applying the transition matrix returns the same distribution:\n$$ \\pi^* P = \\pi^* $$\n\n**Significance:**\n- It represents the long-term equilibrium behavior of the chain.\n- If the chain is **Irreducible** (all states communicate) and **Aperiodic**, $\\pi_n$ converges to $\\pi^*$ as $n \\to \\infty$, regardless of the starting state $\\pi_0$.",
+            "keywords": ["stationary distribution", "equilibrium", "convergence", "eigenvector", "long-run behavior"]
+        },
+        {
+            "id": "note-pat-1",
+            "title": "Pattern Recognition Defined",
+            "topic": "Pattern Recognition",
+            "content": "**Pattern Recognition** is the automated recognition of regularities and structures in data. It is the core discipline behind machine learning.\n\n**Key Components:**\n1.  **Input:** Raw data (vectors, images, signals).\n2.  **Feature Extraction:** Transforming raw data into a meaningful representation (Feature Vector $x$).\n3.  **Classification/Regression:** Assigning the input to a category (Class $y$) or predicting a continuous value.\n\n**Goal:** To learn a function $f(x)$ that approximates the true relationship between inputs and outputs.",
+            "keywords": ["pattern recognition", "features", "classification", "input vectors", "automated learning"]
+        },
+        {
+            "id": "note-pat-2",
+            "title": "Linear Classifiers",
+            "topic": "Pattern Recognition",
+            "content": "A **Linear Classifier** makes decisions based on a linear combination of the features. \n\n\n**Decision Boundary:**\nFor a binary problem, the boundary is a hyperplane defined by $w^T x + b = 0$.\n-   If $w^T x + b > 0$, predict Class 1.\n-   If $w^T x + b < 0$, predict Class 0 (or -1).\n\n**Examples:**\n-   **Perceptron:** An early algorithm that iteratively updates weights to correct classification errors.\n-   **Support Vector Machine (Linear SVM):** Finds the hyperplane that maximizes the *margin* between classes.",
+            "keywords": ["linear classifier", "hyperplane", "decision boundary", "perceptron", "SVM", "weights"]
+        },
+        {
+            "id": "note-pat-3",
+            "title": "k-Nearest Neighbors (k-NN)",
+            "topic": "Pattern Recognition",
+            "content": "**k-NN** is a non-parametric, instance-based learning algorithm. It does not learn a fixed model weights but stores the training data.\n\n**Algorithm:**\n1.  Receive a new query point $x_q$.\n2.  Find the $k$ training examples closest to $x_q$ (usually Euclidean distance).\n3.  **Vote:** The predicted class is the most common class among the $k$ neighbors.\n\n**Characteristics:**\n-   Simple and effective.\n-   **High computational cost** at prediction time (must search the dataset).\n-   Sensitive to the choice of $k$ (Low $k$ = Overfitting; High $k$ = Underfitting).",
+            "keywords": ["k-NN", "nearest neighbors", "instance-based", "non-parametric", "voting"]
+        },
+        {
+            "id": "note-metric-1",
+            "title": "Train-Test Split",
+            "topic": "Model Evaluation",
+            "content": "To evaluate how well a model **generalizes** to unseen data, we cannot test it on the data it was trained on (this would yield a biased, optimistic score).\n\n**Procedure:**\n1.  **Training Set:** Used to optimize the model parameters.\n2.  **Testing Set:** Held out strictly for evaluation. The model *never* sees this during training.\n\n**Common Splits:** 80/20 or 70/30. \n**Randomization:** It is crucial to shuffle data before splitting to ensure the distribution is consistent across sets.",
+            "keywords": ["train test split", "generalization", "hold-out set", "evaluation", "methodology"]
+        },
+        {
+            "id": "note-metric-2",
+            "title": "The Confusion Matrix",
+            "topic": "Classification Metrics",
+            "content": "A table used to evaluate the performance of a classifier. \n\n**Components (for Binary Classification):**\n-   **True Positive (TP):** Correctly predicted positive.\n-   **True Negative (TN):** Correctly predicted negative.\n-   **False Positive (FP):** Incorrectly predicted positive (Type I Error).\n-   **False Negative (FN):** Incorrectly predicted negative (Type II Error).\n\nFrom these raw counts, we derive metrics like Precision, Recall, and Accuracy.",
+            "keywords": ["confusion matrix", "TP", "FP", "type I error", "type II error", "classification"]
+        },
+        {
+            "id": "note-metric-3",
+            "title": "Precision, Recall, and F1-Score",
+            "topic": "Classification Metrics",
+            "content": "Accuracy ($ \\frac{TP+TN}{Total} $) is misleading if classes are imbalanced (e.g., fraud detection). We use:\n\n1.  **Precision:** $\\frac{TP}{TP + FP}$. Of all predicted positives, how many were actually positive? (Focus: Minimize False Positives).\n2.  **Recall (Sensitivity):** $\\frac{TP}{TP + FN}$. Of all actual positives, how many did we find? (Focus: Minimize False Negatives).\n3.  **F1-Score:** The harmonic mean of Precision and Recall. \n    $$ F1 = 2 \\cdot \\frac{Precision \\cdot Recall}{Precision + Recall} $$\n    Useful when you need a balance between the two.",
+            "keywords": ["precision", "recall", "F1 score", "imbalanced data", "sensitivity"]
+        },
+        {
+            "id": "note-metric-4",
+            "title": "VC Dimension (Vapnik–Chervonenkis)",
+            "topic": "Statistical Learning Theory",
+            "content": "The **VC Dimension** ($d_{VC}$) is a measure of the capacity (complexity) of a hypothesis class $\\mathcal{H}$.\n\n**Definition:**\nIt is the size of the largest set of points that can be **shattered** by $\\mathcal{H}$. \n-   *Shattering* means the model can classify the points in all possible $2^n$ ways (all combinations of labels).\n\n**Examples:**\n-   Linear classifier in 2D: $d_{VC} = 3$.\n-   Linear classifier in $d$ dimensions: $d_{VC} = d + 1$.\n\n**Significance:** Higher VC dimension implies a more complex model, which is more prone to overfitting unless the dataset size $n$ is large enough.",
+            "keywords": ["VC dimension", "shattering", "model capacity", "complexity", "statistical learning theory"]
+        },
+        {
+            "id": "note-metric-5",
+            "title": "Generalization Bounds",
+            "topic": "Statistical Learning Theory",
+            "content": "Theory allows us to bound the probability that the True Risk $R(f)$ is significantly higher than the Empirical Risk $\\hat{R}(f)$.\n\n**Vapnik's Bound:**\n$$ R(f) \\le \\hat{R}(f) + \\sqrt{\\frac{h(\\log(2n/h) + 1) - \\log(\\eta/4)}{n}} $$\nwhere $h$ is the VC dimension and $n$ is sample size.\n\n**Takeaway:**\n-   To guarantee good generalization (low $R(f)$), we need $n$ to be large relative to the VC dimension $h$.\n-   \"Smaller VC-dimension $\\to$ better guarantee\" (for a fixed $n$).",
+            "keywords": ["generalization bound", "true risk", "empirical risk", "bound", "sample complexity"]
+        },
+        {
+            "id": "note-reg-1",
+            "title": "Linear Regression Model",
+            "topic": "Regression",
+            "content": "Linear Regression assumes a linear relationship between input variables $X$ and the output $Y$. \n\n**Model:**\n$$ Y = \\beta_0 + \\beta_1 X_1 + \\dots + \\beta_p X_p + \\epsilon $$\n-   $\\beta$: Coefficients (weights).\n-   $\\epsilon$: Error term (Residual), assumed $\\epsilon \\sim \\mathcal{N}(0, \\sigma^2)$.\n\n**Matrix Form:** $Y = X\\beta + \\epsilon$.",
+            "keywords": ["linear regression", "coefficients", "residuals", "matrix form", "modeling"]
+        },
+        {
+            "id": "note-reg-2",
+            "title": "Ordinary Least Squares (OLS)",
+            "topic": "Regression",
+            "content": "OLS is the method used to estimate the unknown $\\beta$ parameters by minimizing the Sum of Squared Errors (SSE).\n\n**Objective:**\n$$ \\min_{\\beta} \\sum_{i=1}^n (y_i - x_i^T \\beta)^2 = \\min_{\\beta} ||Y - X\\beta||^2 $$\n\n**Closed-Form Solution:**\nBy taking the derivative and setting to zero (Normal Equation):\n$$ \\hat{\\beta} = (X^T X)^{-1} X^T Y $$\nThis provides the optimal coefficients provided $X^T X$ is invertible (no perfect multicollinearity).",
+            "keywords": ["OLS", "least squares", "normal equation", "optimization", "closed-form solution"]
+        },
+        {
+            "id": "note-reg-3",
+            "title": "Polynomial Regression",
+            "topic": "Regression",
+            "content": "When data is non-linear, we can still use linear regression machinery by transforming features.\n\n**Basis Expansion:**\nTransform input $x$ into polynomial features: $\\phi(x) = [1, x, x^2, x^3, \\dots]$.\nThe model becomes linear in terms of these new features:\n$$ y = \\beta_0 + \\beta_1 x + \\beta_2 x^2 + \\dots $$\n\n**Risk:** High-degree polynomials dramatically increase model complexity (and VC dimension), leading to **Runge's phenomenon** or severe overfitting at the edges of the data.",
+            "keywords": ["polynomial regression", "basis expansion", "feature engineering", "non-linear", "complexity"]
+        },
+        {
+            "id": "note-reg-4",
+            "title": "Regression Metrics: MSE and R-Squared",
+            "topic": "Regression",
+            "content": "**Mean Squared Error (MSE):**\nThe average squared difference between predictions and actual values.\n$$ MSE = \\frac{1}{n} \\sum (y_i - \\hat{y}_i)^2 $$\n\n**Coefficient of Determination ($R^2$):**\nRepresents the proportion of variance in the dependent variable explained by the model.\n$$ R^2 = 1 - \\frac{SS_{res}}{SS_{tot}} $$\n-   $R^2 = 1$: Perfect fit.\n-   $R^2 = 0$: Model is no better than predicting the mean.\n-   $R^2 < 0$: Model is worse than just predicting the mean (possible on test sets).",
+            "keywords": ["MSE", "R-squared", "variance explained", "goodness of fit", "residuals"]
+        },
+        {
+            "id": "note-reg-5",
+            "title": "Bias-Variance Tradeoff",
+            "topic": "Model Selection",
+            "content": "The total error of a model can be decomposed into three parts:\n\n$$ E[(y - \\hat{f}(x))^2] = \\text{Bias}^2 + \\text{Variance} + \\text{Irreducible Error} $$\n\n1.  **Bias:** Error due to simplifying assumptions (e.g., fitting a line to a curve). High Bias $\\to$ Underfitting.\n2.  **Variance:** Sensitivity to fluctuations in the training set (e.g., high-degree polynomial). High Variance $\\to$ Overfitting.\n\n**Goal:** Find the sweet spot (optimal complexity) that minimizes the sum of Bias and Variance.",
+            "keywords": ["bias-variance tradeoff", "decomposition", "error analysis", "underfitting", "overfitting"]
+        },
+        {
+            "id": "note-hd-1",
+            "title": "The Curse of Dimensionality",
+            "topic": "High-Dimensional Geometry",
+            "content": "The **Curse of Dimensionality** refers to various phenomena that arise when analyzing and organizing data in high-dimensional spaces that do not occur in low-dimensional settings (like 2D or 3D). [Image of curse of dimensionality volume]\n\n**Key Counter-Intuitive Properties:**\n1.  **Empty Space:** High-dimensional spaces are incredibly sparse. The amount of data required to cover the space grows exponentially with the dimension $d$.\n2.  **Distance Concentration:** As $d \\to \\infty$, the distance between any two random points tends to become equal. This makes distance-based metrics (like Euclidean distance in k-NN) less meaningful.\n3.  **Orthogonality:** Two random vectors in high dimensions are very likely to be nearly orthogonal (perpendicular).",
+            "keywords": ["curse of dimensionality", "sparsity", "distance concentration", "orthogonality", "high-dimensional data"]
+        },
+        {
+            "id": "note-hd-2",
+            "title": "Geometry of Hyperspheres and Hypercubes",
+            "topic": "High-Dimensional Geometry",
+            "content": "Our intuition about volumes fails in high dimensions.\n\n**The Hypersphere:**\n-   The volume of a unit hypersphere is $V_d(r) = \\frac{\\pi^{d/2}}{\\Gamma(d/2 + 1)}r^d$.\n-   Surprisingly, as $d \\to \\infty$, the volume of a unit sphere approaches **0**.\n-   **Volume Concentration:** Almost all of the volume of a high-dimensional ball is contained in a thin shell near its surface (the \"crust\").\n\n**The Hypercube:**\n-   The volume is $1^d = 1$.\n-   The length of the main diagonal is $\\sqrt{d}$. In very high dimensions, the corners of the cube are extremely far from the center, while the \"face\" centers are close (distance 1/2).",
+            "keywords": ["hypersphere", "hypercube", "volume concentration", "geometry", "gamma function"]
+        },
+        {
+            "id": "note-dim-1",
+            "title": "Principal Component Analysis (PCA)",
+            "topic": "Dimensionality Reduction",
+            "content": "**PCA** is a linear dimensionality reduction technique that transforms data into a new coordinate system.\n\n**Objectives (Equivalent):**\n1.  **Maximize Variance:** Find the direction (Principal Component) along which the data varies the most.\n2.  **Minimize Reconstruction Error:** Find the lower-dimensional subspace that minimizes the distance between the original data points and their projections.\n\n**Method:**\nCompute the Eigenvectors of the Covariance Matrix $\\Sigma = \\frac{1}{n} X^T X$ (assuming centered data). The eigenvector with the largest eigenvalue is the first Principal Component.",
+            "keywords": ["PCA", "variance maximization", "reconstruction error", "eigenvectors", "covariance matrix"]
+        },
+        {
+            "id": "note-dim-2",
+            "title": "Singular Value Decomposition (SVD)",
+            "topic": "Dimensionality Reduction",
+            "content": "**SVD** is a fundamental matrix factorization method used in PCA and many other applications.\n\n**Theorem:**\nAny matrix $A$ (size $n \\times m$) can be decomposed into:\n$$ A = U \\Sigma V^T $$\n-   $U$: $n \\times n$ orthogonal matrix (Left Singular Vectors).\n-   $\\Sigma$: $n \\times m$ diagonal matrix containing singular values $\\sigma_i \\ge 0$.\n-   $V$: $m \\times m$ orthogonal matrix (Right Singular Vectors).\n\n**Relation to PCA:**\nThe columns of $V$ are the principal components of $A$. The singular values squared are proportional to the eigenvalues of the covariance matrix.",
+            "keywords": ["SVD", "matrix factorization", "singular values", "eigenvalues", "linear algebra"]
+        },
+        {
+            "id": "note-dim-3",
+            "title": "Random Projections (Johnson-Lindenstrauss)",
+            "topic": "Dimensionality Reduction",
+            "content": "For very large datasets, PCA/SVD can be too computationally expensive. **Random Projections** offer a cheaper alternative.\n\n**Johnson-Lindenstrauss Lemma:**\nPoints in a high-dimensional space can be projected into a randomly selected lower-dimensional subspace (of sufficient size) while approximately preserving the pairwise distances between points.\n\n**Method:**\nMultiply the data matrix $A$ by a random matrix $R$ (e.g., with Gaussian entries). This effectively compresses the data while keeping its structure intact for algorithms like k-NN.",
+            "keywords": ["random projection", "Johnson-Lindenstrauss", "distance preservation", "compression", "random matrix"]
+        },
+        {
+            "id": "note-extra-1",
+            "title": "Recommender Systems",
+            "topic": "Collaborative Filtering",
+            "content": "**Recommender Systems** aim to predict a user's preference for an item they have not yet interacted with (e.g., Netflix movies, Amazon products).\n\n**The Problem:**\nWe have a sparse matrix $R$ of users and items with many missing entries (unseen items). We want to predict these missing values.\n\n**Collaborative Filtering:**\n-   **User-User:** Find users similar to Alice and recommend what they liked.\n-   **Item-Item:** Find items similar to what Alice previously liked.",
+            "keywords": ["recommender systems", "collaborative filtering", "sparse matrix", "preference prediction", "Netflix prize"]
+        },
+        {
+            "id": "note-extra-2",
+            "title": "Matrix Factorization for Recommendations",
+            "topic": "Collaborative Filtering",
+            "content": "A powerful approach to Recommender Systems, popularized by the Netflix Prize. [Image of matrix factorization recommendation]\n\n**Concept:**\nAssume the user-item rating matrix $R$ (size $U \\times I$) is approximately the product of two lower-rank matrices:\n$$ R \\approx P \\times Q^T $$\n-   $P$ ($U \\times k$): User Preference Matrix (Latent factors for users).\n-   $Q$ ($I \\times k$): Item Feature Matrix (Latent factors for items).\n\n**Training:**\nLearn $P$ and $Q$ by minimizing the squared error on the *observed* ratings, usually via Gradient Descent or Alternating Least Squares (ALS). The dot product $p_u \\cdot q_i$ then predicts the missing rating.",
+            "keywords": ["matrix factorization", "latent factors", "ALS", "gradient descent", "predictions"]
         }
     ]
 }
