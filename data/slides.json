@@ -1,44 +1,172 @@
 {
     "slides": [
         {
-            "id": "slide-1",
-            "title": "Lecture 1 - Introduction to Data Science",
-            "description": "Overview of the course, what is data science, the data science pipeline, tools and technologies",
-            "topic": "Introduction",
-            "pdfPath": "slides/lecture-01-intro.pdf",
-            "keywords": ["data science", "introduction", "pipeline", "overview", "machine learning", "statistics"]
+            "id": "slide-01",
+            "title": "Lecture 01 - Probability",
+            "description": "Introduction to probability theory, probability axioms, conditional probability, Bayes' theorem",
+            "topic": "Probability",
+            "slidePath": "slides/01-Probability.html",
+            "keywords": ["probability", "Bayes", "conditional", "axioms", "events", "sample space"]
         },
         {
-            "id": "slide-2",
-            "title": "Lecture 2 - Data Collection & Cleaning",
-            "description": "Data sources, web scraping, APIs, data cleaning techniques, handling missing values",
-            "topic": "Data Wrangling",
-            "pdfPath": "slides/lecture-02-data-collection.pdf",
-            "keywords": ["data collection", "web scraping", "API", "cleaning", "missing values", "preprocessing"]
+            "id": "slide-02a",
+            "title": "Lecture 02 - Random Variables",
+            "description": "Random variables, probability distributions, discrete and continuous variables",
+            "topic": "Random Variables",
+            "slidePath": "slides/02-Random_Variables.html",
+            "keywords": ["random variables", "distribution", "discrete", "continuous", "PMF", "PDF"]
         },
         {
-            "id": "slide-3",
-            "title": "Lecture 3 - Exploratory Data Analysis",
-            "description": "Descriptive statistics, visualizations, distributions, correlations, outlier detection",
-            "topic": "EDA",
-            "pdfPath": "slides/lecture-03-eda.pdf",
-            "keywords": ["EDA", "visualization", "statistics", "histogram", "scatter plot", "correlation"]
+            "id": "slide-02b",
+            "title": "Lecture 02 - Random Variables Examples",
+            "description": "Examples and exercises on random variables",
+            "topic": "Random Variables",
+            "slidePath": "slides/02-Random_Variables_examples.html",
+            "keywords": ["random variables", "examples", "exercises", "distributions"]
         },
         {
-            "id": "slide-4",
-            "title": "Lecture 4 - Machine Learning Fundamentals",
-            "description": "Supervised vs unsupervised learning, training and testing, model evaluation metrics",
+            "id": "slide-03",
+            "title": "Lecture 03 - Random Variables (Continued)",
+            "description": "Expected value, variance, common distributions, joint distributions",
+            "topic": "Random Variables",
+            "slidePath": "slides/03-Random_Variables.html",
+            "keywords": ["expected value", "variance", "normal", "binomial", "Poisson", "joint distribution"]
+        },
+        {
+            "id": "slide-04",
+            "title": "Lecture 04 - Concentration and Limits",
+            "description": "Law of large numbers, concentration inequalities, Chebyshev, Hoeffding",
+            "topic": "Limits",
+            "slidePath": "slides/04-Concentration_and_Limits.html",
+            "keywords": ["concentration", "LLN", "Chebyshev", "Hoeffding", "bounds", "convergence"]
+        },
+        {
+            "id": "slide-05a",
+            "title": "Lecture 05 - Limits",
+            "description": "Central Limit Theorem, convergence types, asymptotic behavior",
+            "topic": "Limits",
+            "slidePath": "slides/05-Limits.html",
+            "keywords": ["CLT", "central limit theorem", "convergence", "asymptotic", "normal approximation"]
+        },
+        {
+            "id": "slide-05b",
+            "title": "Lecture 05 - Risk",
+            "description": "Risk functions, loss functions, decision theory",
+            "topic": "Estimation",
+            "slidePath": "slides/05-Risk.html",
+            "keywords": ["risk", "loss", "decision theory", "expected loss", "Bayes risk"]
+        },
+        {
+            "id": "slide-06",
+            "title": "Lecture 06 - Fundamentals of Estimation",
+            "description": "Point estimation, bias, variance, MSE, consistency",
+            "topic": "Estimation",
+            "slidePath": "slides/06-Fundamentals_of_estimation.html",
+            "keywords": ["estimation", "bias", "variance", "MSE", "consistency", "unbiased"]
+        },
+        {
+            "id": "slide-07a",
+            "title": "Lecture 07 - Estimation & Likelihood",
+            "description": "Maximum likelihood estimation, MLE properties, Fisher information",
+            "topic": "Estimation",
+            "slidePath": "slides/07-Estimation_Likelihood.html",
+            "keywords": ["MLE", "maximum likelihood", "Fisher information", "likelihood function", "log-likelihood"]
+        },
+        {
+            "id": "slide-07b",
+            "title": "Lecture 07 - Optimization",
+            "description": "Optimization methods, gradient descent, convexity",
+            "topic": "Optimization",
+            "slidePath": "slides/07-Optimization.html",
+            "keywords": ["optimization", "gradient descent", "convex", "minima", "learning rate"]
+        },
+        {
+            "id": "slide-07c",
+            "title": "Lecture 07 - Standard Error",
+            "description": "Standard error, confidence intervals, hypothesis testing basics",
+            "topic": "Estimation",
+            "slidePath": "slides/07-StandardError.html",
+            "keywords": ["standard error", "confidence interval", "hypothesis", "significance", "p-value"]
+        },
+        {
+            "id": "slide-08a",
+            "title": "Lecture 08 - Generating Random Variables",
+            "description": "Methods for generating random variables, inverse transform, rejection sampling",
+            "topic": "Simulation",
+            "slidePath": "slides/08-GeneratingRandomVariables.html",
+            "keywords": ["random generation", "inverse transform", "rejection sampling", "simulation", "Monte Carlo"]
+        },
+        {
+            "id": "slide-08b",
+            "title": "Lecture 08 - PRNG",
+            "description": "Pseudo-random number generators, seeds, randomness testing",
+            "topic": "Simulation",
+            "slidePath": "slides/08-PRNG.html",
+            "keywords": ["PRNG", "pseudo-random", "seed", "random generator", "LCG"]
+        },
+        {
+            "id": "slide-09",
+            "title": "Lecture 09 - Markov Chains",
+            "description": "Markov chains, transition matrices, stationary distributions, MCMC",
+            "topic": "Markov Chains",
+            "slidePath": "slides/09-Markov_chains.html",
+            "keywords": ["Markov", "transition matrix", "stationary", "MCMC", "ergodic", "irreducible"]
+        },
+        {
+            "id": "slide-10",
+            "title": "Lecture 10 - Pattern Recognition",
+            "description": "Introduction to pattern recognition, classification basics, feature extraction",
             "topic": "Machine Learning",
-            "pdfPath": "slides/lecture-04-ml-fundamentals.pdf",
-            "keywords": ["machine learning", "supervised", "unsupervised", "training", "testing", "evaluation"]
+            "slidePath": "slides/10-Pattern_Recognition.html",
+            "keywords": ["pattern recognition", "classification", "features", "supervised learning", "clustering"]
         },
         {
-            "id": "slide-5",
-            "title": "Lecture 5 - Regression",
-            "description": "Linear regression, polynomial regression, regularization (Ridge, Lasso), evaluation metrics",
+            "id": "slide-11",
+            "title": "Lecture 11 - Training, Testing & Metrics",
+            "description": "Train-test split, cross-validation, evaluation metrics, confusion matrix",
             "topic": "Machine Learning",
-            "pdfPath": "slides/lecture-05-regression.pdf",
-            "keywords": ["regression", "linear", "polynomial", "ridge", "lasso", "MSE", "R-squared"]
+            "slidePath": "slides/11-Training_Testing_Metrics.html",
+            "keywords": ["training", "testing", "cross-validation", "accuracy", "precision", "recall", "F1", "confusion matrix"]
+        },
+        {
+            "id": "slide-12",
+            "title": "Lecture 12 - Regression",
+            "description": "Linear regression, polynomial regression, regularization, Ridge, Lasso",
+            "topic": "Machine Learning",
+            "slidePath": "slides/12-Regression.html",
+            "keywords": ["regression", "linear", "polynomial", "Ridge", "Lasso", "MSE", "R-squared", "regularization"]
+        },
+        {
+            "id": "slide-13",
+            "title": "Lecture 13 - High Dimension",
+            "description": "Curse of dimensionality, high-dimensional data, sparsity",
+            "topic": "High Dimension",
+            "slidePath": "slides/13-High_Dimension.html",
+            "keywords": ["high dimension", "curse of dimensionality", "sparsity", "feature selection"]
+        },
+        {
+            "id": "slide-14",
+            "title": "Lecture 14 - Dimensionality Reduction",
+            "description": "PCA, SVD, feature extraction, dimensionality reduction techniques",
+            "topic": "High Dimension",
+            "slidePath": "slides/14-Dimensionality_Reduction.html",
+            "keywords": ["PCA", "SVD", "dimensionality reduction", "principal components", "eigenvalues", "eigenvectors"]
+        },
+        {
+            "id": "slide-15",
+            "title": "Lecture 15 - Extra Topics",
+            "description": "Additional topics, review, advanced concepts",
+            "topic": "Extra",
+            "slidePath": "slides/15-Extra_Topics.html",
+            "keywords": ["extra", "advanced", "review", "additional topics"]
+        },
+        {
+            "id": "slide-A01",
+            "title": "Appendix - BASH Unix Shell",
+            "description": "Unix shell basics, command line, BASH scripting",
+            "topic": "Tools",
+            "slidePath": "slides/A01-BASH_Unix_Shell.html",
+            "keywords": ["BASH", "Unix", "shell", "command line", "terminal", "scripting"]
         }
     ]
 }

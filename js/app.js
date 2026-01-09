@@ -112,11 +112,11 @@ class App {
 
         // Modal close
         document.querySelector('.close-modal').addEventListener('click', () => {
-            document.getElementById('pdf-modal').classList.remove('active');
+            document.getElementById('slide-modal').classList.remove('active');
         });
 
         // Close modal on backdrop click
-        document.getElementById('pdf-modal').addEventListener('click', (e) => {
+        document.getElementById('slide-modal').addEventListener('click', (e) => {
             if (e.target === e.currentTarget) {
                 e.currentTarget.classList.remove('active');
             }
@@ -125,7 +125,7 @@ class App {
         // Escape key to close modal
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                document.getElementById('pdf-modal').classList.remove('active');
+                document.getElementById('slide-modal').classList.remove('active');
             }
         });
     }
@@ -307,7 +307,7 @@ class App {
         if (slides.length === 0) {
             container.innerHTML = `
                 <div class="no-results">
-                    <i class="fas fa-file-pdf"></i>
+                    <i class="fas fa-chalkboard"></i>
                     <p>No slides found</p>
                 </div>
             `;
@@ -315,9 +315,9 @@ class App {
         }
 
         container.innerHTML = slides.map(slide => `
-            <div class="slide-card" data-pdf="${slide.pdfPath}" data-title="${slide.title}">
+            <div class="slide-card" data-slide-path="${slide.slidePath}" data-title="${slide.title}">
                 <div class="slide-thumbnail">
-                    <i class="fas fa-file-pdf"></i>
+                    <i class="fas fa-chalkboard-teacher"></i>
                 </div>
                 <div class="slide-info">
                     <h4>${slide.title}</h4>
@@ -327,23 +327,25 @@ class App {
             </div>
         `).join('');
 
-        // Add click handlers for PDF viewing
+        // Add click handlers for slide viewing
         container.querySelectorAll('.slide-card').forEach(card => {
             card.addEventListener('click', () => {
-                const pdfPath = card.dataset.pdf;
+                const slidePath = card.dataset.slidePath;
                 const title = card.dataset.title;
-                this.openPdfViewer(pdfPath, title);
+                this.openSlideViewer(slidePath, title);
             });
         });
     }
 
-    openPdfViewer(pdfPath, title) {
-        const modal = document.getElementById('pdf-modal');
-        const iframe = document.getElementById('pdf-iframe');
-        const titleEl = document.getElementById('pdf-title');
+    openSlideViewer(slidePath, title) {
+        const modal = document.getElementById('slide-modal');
+        const iframe = document.getElementById('slide-iframe');
+        const titleEl = document.getElementById('slide-title');
+        const openNewLink = document.getElementById('slide-open-new');
 
         titleEl.textContent = title;
-        iframe.src = pdfPath;
+        iframe.src = slidePath;
+        openNewLink.href = slidePath;
         modal.classList.add('active');
     }
 
