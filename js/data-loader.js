@@ -83,6 +83,30 @@ class DataLoader {
         return Array.from(topics).sort();
     }
 
+    getSlideTopics() {
+        const topics = new Set();
+        this.slides.forEach(slide => {
+            if (slide.topic) topics.add(slide.topic);
+        });
+        return Array.from(topics).sort();
+    }
+
+    getNoteTopics() {
+        const topics = new Set();
+        this.notes.forEach(note => {
+            if (note.topic) topics.add(note.topic);
+        });
+        return Array.from(topics).sort();
+    }
+
+    getExamTopics() {
+        const topics = new Set();
+        this.exams.forEach(exam => {
+            if (exam.topic) topics.add(exam.topic);
+        });
+        return Array.from(topics).sort();
+    }
+
     getExamYears() {
         const years = new Set();
         this.exams.forEach(exam => {

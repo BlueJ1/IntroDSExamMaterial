@@ -43,24 +43,26 @@ class App {
     }
 
     populateFilters() {
-        const topics = dataLoader.getAllTopics();
+        const slideTopics = dataLoader.getSlideTopics();
+        const noteTopics = dataLoader.getNoteTopics();
+        const examTopics = dataLoader.getExamTopics();
         const years = dataLoader.getExamYears();
 
         // Slides topic filter
         const slidesTopicFilter = document.getElementById('slides-topic-filter');
-        topics.forEach(topic => {
+        slideTopics.forEach(topic => {
             slidesTopicFilter.innerHTML += `<option value="${topic}">${topic}</option>`;
         });
 
         // Notes topic filter
         const notesTopicFilter = document.getElementById('notes-topic-filter');
-        topics.forEach(topic => {
+        noteTopics.forEach(topic => {
             notesTopicFilter.innerHTML += `<option value="${topic}">${topic}</option>`;
         });
 
         // Exams topic filter
         const examsTopicFilter = document.getElementById('exams-topic-filter');
-        topics.forEach(topic => {
+        examTopics.forEach(topic => {
             examsTopicFilter.innerHTML += `<option value="${topic}">${topic}</option>`;
         });
 
