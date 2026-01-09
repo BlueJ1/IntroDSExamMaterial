@@ -2,39 +2,87 @@
     "notes": [
         {
             "id": "note-1",
-            "title": "Data Science Pipeline Overview",
-            "topic": "Introduction",
-            "content": "The **Data Science Pipeline** consists of the following stages:\n\n1. **Problem Definition** - Understanding the business problem\n2. **Data Collection** - Gathering data from various sources\n3. **Data Cleaning** - Handling missing values, outliers, inconsistencies\n4. **EDA** - Exploratory Data Analysis to understand patterns\n5. **Feature Engineering** - Creating new features from existing data\n6. **Modeling** - Applying ML algorithms\n7. **Evaluation** - Assessing model performance\n8. **Deployment** - Putting the model into production\n\nKey tools: Python (pandas, numpy, scikit-learn), R, SQL, Jupyter Notebooks",
-            "keywords": ["pipeline", "data science", "workflow", "machine learning", "pandas", "numpy"]
+            "title": "Axiomatic Probability Framework",
+            "topic": "Probability Theory",
+            "content": "The course is built upon the **Kolmogorov Axiomatic System** for probability, defined by the probability triple $(\\Omega, \\mathcal{F}, \\mathbb{P})$.\n\n### Components\n1. **Sample Space ($\\Omega$)**: The set of all possible distinct outcomes of an experiment (e.g., $\\{H, T\\}$ for a coin toss).\n2. **Sigma-Algebra ($\\mathcal{F}$)**: A collection of subsets of $\\Omega$ (events) that is closed under:\n   - Complementation: If $A \\in \\mathcal{F}$, then $A^c \\in \\mathcal{F}$.\n   - Countable Unions: If $A_1, A_2, ... \\in \\mathcal{F}$, then $\\bigcup A_i \\in \\mathcal{F}$.\n   - Contains the sample space: $\\Omega \\in \\mathcal{F}$.\n3. **Probability Measure ($\\mathbb{P}$)**: A function $\\mathbb{P}: \\mathcal{F} \\to [0, 1]$ satisfying:\n   - **Normalization**: $\\mathbb{P}(\\Omega) = 1$.\n   - **Countable Additivity**: For mutually exclusive events $A_1, A_2, ...$ (where $A_i \\cap A_j = \\emptyset$), $\\mathbb{P}(\\bigcup_{i} A_i) = \\sum_{i} \\mathbb{P}(A_i)$.\n\n### Derived Properties\n- **Complement Rule**: $\\mathbb{P}(A^c) = 1 - \\mathbb{P}(A)$.\n- **Inclusion-Exclusion Principle**: $\\mathbb{P}(A \\cup B) = \\mathbb{P}(A) + \\mathbb{P}(B) - \\mathbb{P}(A \\cap B)$.\n- **Boole's Inequality (Union Bound)**: $\\mathbb{P}(\\bigcup A_i) \\le \\sum \\mathbb{P}(A_i)$. This is crucial for bounding error probabilities in learning theory.",
+            "keywords": ["sample space", "sigma-algebra", "probability measure", "axioms", "union bound", "Kolmogorov"]
         },
         {
             "id": "note-2",
-            "title": "Handling Missing Values",
-            "topic": "Data Wrangling",
-            "content": "**Strategies for handling missing values:**\n\n**1. Deletion:**\n- `df.dropna()` - Remove rows with missing values\n- Only use when missing data is random and small proportion\n\n**2. Imputation:**\n- Mean/Median imputation: `df.fillna(df.mean())`\n- Mode for categorical: `df.fillna(df.mode()[0])`\n- Forward/backward fill: `df.fillna(method='ffill')`\n\n**3. Advanced Methods:**\n- KNN Imputation\n- MICE (Multiple Imputation by Chained Equations)\n- Model-based imputation\n\n**Important:** Always analyze WHY data is missing before choosing a strategy!",
-            "keywords": ["missing values", "imputation", "dropna", "fillna", "NaN", "null", "data cleaning"]
+            "title": "Conditional Probability and Independence",
+            "topic": "Probability Theory",
+            "content": "### Conditional Probability\nDefined as $\\mathbb{P}(A|B) = \\frac{\\mathbb{P}(A \\cap B)}{\\mathbb{P}(B)}$, provided $\\mathbb{P}(B) > 0$. It updates the probability of event $A$ given that event $B$ has occurred.\n\n### Key Theorems\n- **Bayes' Theorem**: Relates conditional probabilities: \n  $$\\mathbb{P}(A|B) = \\frac{\\mathbb{P}(B|A)\\mathbb{P}(A)}{\\mathbb{P}(B)}$$\n  Useful for reversing conditional probabilities (e.g., inference).\n- **Law of Total Probability**: If $B_1, ..., B_n$ partiton $\\Omega$, then $\\mathbb{P}(A) = \\sum_i \\mathbb{P}(A|B_i)\\mathbb{P}(B_i)$.\n\n### Independence\nTwo events $A$ and $B$ are **independent** if knowledge of one does not affect the other:\n$$\\mathbb{P}(A \\cap B) = \\mathbb{P}(A)\\mathbb{P}(B)$$\nThis implies $\\mathbb{P}(A|B) = \\mathbb{P}(A)$. Independence is a fundamental assumption in many statistical models (e.g., I.I.D. samples).",
+            "keywords": ["conditional probability", "Bayes theorem", "independence", "total probability", "inference"]
         },
         {
             "id": "note-3",
-            "title": "Train-Test Split and Cross-Validation",
-            "topic": "Machine Learning",
-            "content": "**Train-Test Split:**\n```\nfrom sklearn.model_selection import train_test_split\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n```\n\n**Cross-Validation:**\n- K-Fold CV: Split data into K folds, train on K-1, test on 1, rotate\n- Stratified K-Fold: Preserves class distribution in each fold\n- Leave-One-Out: K = n (number of samples)\n\n```\nfrom sklearn.model_selection import cross_val_score\nscores = cross_val_score(model, X, y, cv=5)\n```\n\n**Why use CV?**\n- More reliable performance estimate\n- Makes better use of limited data\n- Reduces overfitting risk",
-            "keywords": ["train test split", "cross validation", "k-fold", "stratified", "overfitting", "sklearn"]
+            "title": "Random Variables and Distributions",
+            "topic": "Random Variables",
+            "content": "A **Random Variable (RV)** is a measurable function $X: \\Omega \\to E$ (usually $E = \\mathbb{R}$) mapping outcomes to numerical values.\n\n### Types of RVs\n1. **Discrete RV**: Takes values in a countable set. Characterized by a **Probability Mass Function (PMF)**: $f_X(x) = \\mathbb{P}(X=x)$.\n2. **Continuous RV**: Takes values in an uncountably infinite set (e.g., $\\mathbb{R}$). Characterized by a **Probability Density Function (PDF)** $f_X(x)$, where $\\mathbb{P}(a \\le X \\le b) = \\int_a^b f_X(x) dx$.\n\n### Cumulative Distribution Function (CDF)\nDefined as $F_X(x) = \\mathbb{P}(X \\le x)$.\n- It is non-decreasing, right-continuous, $\\lim_{x\\to-\\infty}F(x)=0$, and $\\lim_{x\\to\\infty}F(x)=1$.\n- For continuous RVs, $f_X(x) = \\frac{d}{dx}F_X(x)$.\n\n### Empirical Distributions (Computational)\nIn data science, we often work with the **Empirical Distribution Function (EDF)** based on observations, which converges to the true CDF as sample size increases.",
+            "keywords": ["random variable", "PMF", "PDF", "CDF", "discrete", "continuous", "empirical distribution"]
         },
         {
             "id": "note-4",
-            "title": "Regression Metrics",
-            "topic": "Machine Learning",
-            "content": "**Key Regression Metrics:**\n\n**MSE (Mean Squared Error):**\n- Average of squared differences\n- Penalizes large errors more\n- Formula: MSE = (1/n) * Σ(y - ŷ)²\n\n**RMSE (Root Mean Squared Error):**\n- Square root of MSE\n- Same units as target variable\n- More interpretable than MSE\n\n**MAE (Mean Absolute Error):**\n- Average of absolute differences\n- Robust to outliers\n- Formula: MAE = (1/n) * Σ|y - ŷ|\n\n**R² (Coefficient of Determination):**\n- Proportion of variance explained\n- Range: 0 to 1 (can be negative for bad models)\n- R² = 1 - (SS_res / SS_tot)\n\n**Adjusted R²:**\n- Accounts for number of predictors\n- Use when comparing models with different features",
-            "keywords": ["MSE", "RMSE", "MAE", "R-squared", "metrics", "evaluation", "regression"]
+            "title": "Expectation, Variance, and Moments",
+            "topic": "Statistics",
+            "content": "### Expectation (Mean)\nThe expected value $\\mathbb{E}[X]$ represents the center of mass of the distribution.\n- **Discrete**: $\\sum x_i f_X(x_i)$\n- **Continuous**: $\\int x f_X(x) dx$\n**Linearity of Expectation**: $\\mathbb{E}[aX + bY] = a\\mathbb{E}[X] + b\\mathbb{E}[Y]$. This holds regardless of whether $X$ and $Y$ are independent.\n\n### Variance\nMeasures the spread of the distribution: $Var(X) = \\mathbb{E}[(X - \\mathbb{E}[X])^2] = \\mathbb{E}[X^2] - (\\mathbb{E}[X])^2$.\n- **Standard Deviation**: $\\sigma_X = \\sqrt{Var(X)}$.\n- **Scaling**: $Var(aX + b) = a^2 Var(X)$.\n\n### Covariance and Correlation\n- **Covariance**: $Cov(X, Y) = \\mathbb{E}[(X-\\mu_X)(Y-\\mu_Y)]$.\n- **Independence**: If $X, Y$ independent $\\implies Cov(X, Y) = 0$ (uncorrelated). The converse is not always true.",
+            "keywords": ["expectation", "variance", "moments", "covariance", "linearity", "standard deviation"]
         },
         {
             "id": "note-5",
-            "title": "Regularization - Ridge vs Lasso",
+            "title": "Conditional Expectation and The Tower Property",
+            "topic": "Advanced Probability",
+            "content": "### Conditional Expectation\n$\\mathbb{E}[X|Y]$ is a random variable that represents the \"best guess\" of $X$ given the value of $Y$. It is a function of $Y$.\n\n### The Tower Property (Law of Iterated Expectations)\nA powerful tool in probability proofs and martingale theory:\n$$\\mathbb{E}[\\mathbb{E}[X|Y]] = \\mathbb{E}[X]$$\nThis states that the expected value of the conditional expectation is the unconditional expectation. \n\n**Application**: Used to derive the mean of complex hierarchical models or random sums (e.g., Branching processes).",
+            "keywords": ["conditional expectation", "tower property", "iterated expectation", "stochastic processes"]
+        },
+        {
+            "id": "note-6",
+            "title": "Concentration Inequalities",
+            "topic": "Concentration of Measure",
+            "content": "These inequalities bound the probability that a random variable deviates far from its mean. Essential for proving convergence and learning bounds.\n\n1. **Markov's Inequality**: For non-negative $X$ and $a > 0$: $\\mathbb{P}(X \\ge a) \\le \\frac{\\mathbb{E}[X]}{a}$.\n2. **Chebyshev's Inequality**: Uses variance to bound deviation: $\\mathbb{P}(|X - \\mu| \\ge k) \\le \\frac{Var(X)}{k^2}$.\n3. **Hoeffding's Inequality**: For bounded independent RVs. Provides an exponential decay bound on the probability of the sum deviating from the mean. Much tighter than Chebyshev for bounded variables.\n   $$\\mathbb{P}(|\\bar{X} - \\mathbb{E}[\\bar{X}]| \\ge t) \\le 2\\exp\\left(-\\frac{2n^2t^2}{\\sum (b_i-a_i)^2}\\right)$$\n\n### Concept\n**Concentration of Measure**: In high dimensions, random variables tend to concentrate strongly around their mean (or median).",
+            "keywords": ["Markov inequality", "Chebyshev inequality", "Hoeffding inequality", "concentration", "bounds"]
+        },
+        {
+            "id": "note-7",
+            "title": "Convergence and Limit Theorems",
+            "topic": "Limit Theorems",
+            "content": "### Modes of Convergence\n1. **Convergence in Probability** ($X_n \\xrightarrow{P} X$): The probability of $X_n$ differing from $X$ by $\\epsilon$ goes to 0.\n2. **Convergence in Distribution** ($X_n \\xrightarrow{d} X$): The CDFs converge $F_{X_n}(x) \\to F_X(x)$. (Weakest form).\n3. **Almost Sure Convergence**: The sequence converges with probability 1.\n\n### Law of Large Numbers (LLN)\nStates that the sample mean $\\bar{X}_n$ converges to the true mean $\\mu$ as $n \\to \\infty$.\n\n### Central Limit Theorem (CLT)\nThe sum of many independent RVs tends toward a Normal distribution, regardless of the original distribution (finite variance required). \n$$\\frac{\\sum X_i - n\\mu}{\\sqrt{n}\\sigma} \\xrightarrow{d} \\mathcal{N}(0, 1)$$",
+            "keywords": ["convergence", "LLN", "CLT", "central limit theorem", "law of large numbers", "asymptotic"]
+        },
+        {
+            "id": "note-8",
+            "title": "Statistical Learning Theory and Risk",
             "topic": "Machine Learning",
-            "content": "**Regularization** adds a penalty term to prevent overfitting.\n\n**Ridge Regression (L2):**\n- Penalty: λ * Σ(β²)\n- Shrinks coefficients toward zero but never exactly zero\n- Good when all features are relevant\n- `from sklearn.linear_model import Ridge`\n\n**Lasso Regression (L1):**\n- Penalty: λ * Σ|β|\n- Can shrink coefficients to exactly zero\n- Performs feature selection\n- `from sklearn.linear_model import Lasso`\n\n**Elastic Net:**\n- Combines L1 and L2 penalties\n- Best of both worlds\n- `from sklearn.linear_model import ElasticNet`\n\n**Choosing λ (alpha):**\n- Use cross-validation\n- `RidgeCV`, `LassoCV` for automatic selection",
-            "keywords": ["regularization", "ridge", "lasso", "L1", "L2", "elastic net", "overfitting", "feature selection"]
+            "content": "### The Learning Problem\nGoal: Find a function $f: \\mathcal{X} \\to \\mathcal{Y}$ that minimizes error on unseen data.\n\n### Risk Definitions\n- **Loss Function** $L(y, f(x))$: Penalizes mismatch between truth $y$ and prediction $f(x)$. (e.g., Squared error $(y-f(x))^2$, 0-1 Loss).\n- **True Risk** $R(f) = \\mathbb{E}[L(Y, f(X))]$: The expected loss over the true data distribution.\n- **Empirical Risk** $\\hat{R}_n(f) = \\frac{1}{n} \\sum_{i=1}^n L(y_i, f(x_i))$: The average loss on the training set.\n\n### Empirical Risk Minimization (ERM)\nSince we don't know the true distribution, we minimize $\\hat{R}_n(f)$. \n**Overfitting** occurs when $\\hat{R}_n(f)$ is low but $R(f)$ is high. Regularization or bounding the complexity of the function class (VC dimension) is used to guarantee $R(f) \\approx \\hat{R}_n(f)$.",
+            "keywords": ["risk", "empirical risk minimization", "ERM", "loss function", "supervised learning", "generalization"]
+        },
+        {
+            "id": "note-9",
+            "title": "Fundamentals of Estimation",
+            "topic": "Statistics",
+            "content": "### Point Estimation\nEstimating a population parameter $\\theta$ using a statistic $\\hat{\\theta}(X_1, ..., X_n)$.\n\n### Properties of Estimators\n- **Bias**: $Bias(\\hat{\\theta}) = \\mathbb{E}[\\hat{\\theta}] - \\theta$. An estimator is unbiased if Bias is 0.\n- **Consistency**: As $n \\to \\infty$, $\\hat{\\theta} \\xrightarrow{P} \\theta$.\n- **Mean Squared Error (MSE)**: $MSE(\\hat{\\theta}) = \\mathbb{E}[(\\hat{\\theta} - \\theta)^2] = Var(\\hat{\\theta}) + [Bias(\\hat{\\theta})]^2$. Bias-Variance Tradeoff.\n\n### Maximum Likelihood Estimation (MLE)\nA method to find parameters that maximize the likelihood function $L(\\theta; x) = f(x|\\theta)$.\n- Often done by maximizing log-likelihood $\\ell(\\theta)$.\n- MLEs are typically consistent and asymptotically normal.",
+            "keywords": ["estimation", "bias", "consistency", "MLE", "maximum likelihood", "MSE"]
+        },
+        {
+            "id": "note-10",
+            "title": "Markov Chains",
+            "topic": "Stochastic Processes",
+            "content": "A sequence of RVs $X_0, X_1, ...$ satisfying the **Markov Property**: The future depends only on the present, not the past.\n$$\\mathbb{P}(X_{n+1} = j | X_n = i, X_{n-1}, ...) = \\mathbb{P}(X_{n+1} = j | X_n = i) = P_{ij}$$\n\n### Key Concepts\n- **Transition Matrix ($P$)**: Contains probabilities $P_{ij}$ of moving from state $i$ to $j$.\n- **Stationary Distribution ($\\pi$)**: A distribution satisfying $\\pi P = \\pi$. If the chain runs long enough, it converges to $\\pi$ (under conditions of irreducibility and aperiodicity).\n- **Reversibility**: A chain is reversible if it satisfies detailed balance: $\\pi_i P_{ij} = \\pi_j P_{ji}$. This is relevant for MCMC methods and random walks on graphs.",
+            "keywords": ["Markov chain", "transition matrix", "stationary distribution", "Markov property", "reversibility"]
+        },
+        {
+            "id": "note-11",
+            "title": "Random Variable Generation",
+            "topic": "Computational Statistics",
+            "content": "Methods to generate samples from a specific distribution using a source of uniform random numbers (pseudo-randomness).\n\n### Inverse Transform Sampling\nIf $U \\sim Uniform(0,1)$ and $F$ is a CDF, then $X = F^{-1}(U)$ has distribution $F$. (Requires $F$ to be invertible).\n\n### Rejection Sampling\nUsed when $F^{-1}$ is hard to compute. Sample from a simpler proposal distribution $g(x)$ and accept with probability proportional to the ratio $f(x)/Mg(x)$.",
+            "keywords": ["random generation", "sampling", "inverse transform", "rejection sampling", "simulation"]
+        },
+        {
+            "id": "note-12",
+            "title": "High Dimensional Geometry and Dimensionality Reduction",
+            "topic": "High Dimensional Data",
+            "content": "### The Curse of Dimensionality\nIntuition from 2D/3D often fails in high $d$. \n- **Volume Concentration**: Most volume of a high-dimensional ball is near the surface (crust).\n- **Orthogonality**: Random vectors in high dimensions are likely to be nearly orthogonal.\n\n### Dimensionality Reduction Techniques\n- **Principal Component Analysis (PCA)**: Projects data onto the directions of maximum variance (eigenvectors of covariance matrix).\n- **Singular Value Decomposition (SVD)**: Factorization $A = U \\Sigma V^T$. Used for PCA, compression, and noise reduction.\n- **Random Projections**: The Johnson-Lindenstrauss lemma states that points can be projected to a lower dimension while approximately preserving pairwise distances, often using random matrices.",
+            "keywords": ["high dimension", "PCA", "SVD", "Johnson-Lindenstrauss", "random projection", "curse of dimensionality"]
         }
     ]
 }
-

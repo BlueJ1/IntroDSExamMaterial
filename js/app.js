@@ -376,23 +376,78 @@ class App {
                 ${note.topic ? `<span class="note-topic">${note.topic}</span>` : ''}
             </div>
         `).join('');
+
+        // Trigger MathJax to render math formulas
+        if (window.MathJax) {
+            MathJax.typesetPromise([container]).catch((err) => console.log('MathJax error:', err));
+        }
     }
 
     formatNoteContent(content) {
         if (!content) return '';
 
-        // Simple markdown-like formatting
-        let formatted = content
-            // Code blocks
-            .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-            // Inline code
-            .replace(/`([^`]+)`/g, '<code>$1</code>')
-            // Bold
+        // Store code blocks and math to prevent interference
+        const codeBlocks = [];
+        const mathBlocks = [];
+        const inlineMath = [];
+
+        // Temporarily replace code blocks
+        let formatted = content.replace(/```([\s\S]*?)```/g, (match, code) => {
+            codeBlocks.push(code);
+            return `__CODEBLOCK_${codeBlocks.length - 1}__`;
+        });
+
+        // Temporarily replace display math ($$...$$)
+        formatted = formatted.replace(/\$\$([\s\S]*?)\$\$/g, (match, math) => {
+            mathBlocks.push(math);
+            return `__MATHBLOCK_${mathBlocks.length - 1}__`;
+        });
+
+        // Temporarily replace inline math ($...$)
+        formatted = formatted.replace(/\$([^\$\n]+?)\$/g, (match, math) => {
+            inlineMath.push(math);
+            return `__INLINEMATH_${inlineMath.length - 1}__`;
+        });
+
+        // Now process markdown
+        formatted = formatted
+            // Headers
+            .replace(/^### (.+)$/gm, '<h4>$1</h4>')
+            .replace(/^## (.+)$/gm, '<h3>$1</h3>')
+            .replace(/^# (.+)$/gm, '<h3>$1</h3>')
+            // Bold (before italic to avoid conflicts)
             .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
             // Italic
-            .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+            .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+            // Inline code (backticks)
+            .replace(/`([^`]+)`/g, '<code>$1</code>')
+            // Unordered lists
+            .replace(/^- (.+)$/gm, '<li>$1</li>')
+            // Numbered lists
+            .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
             // Line breaks
+            .replace(/\n\n/g, '<br><br>')
             .replace(/\n/g, '<br>');
+
+        // Wrap consecutive <li> items in <ul>
+        formatted = formatted.replace(/(<li>.*?<\/li>(?:<br>)?)+/g, (match) => {
+            return '<ul>' + match.replace(/<br>/g, '') + '</ul>';
+        });
+
+        // Restore code blocks
+        formatted = formatted.replace(/__CODEBLOCK_(\d+)__/g, (match, index) => {
+            return `<pre><code>${codeBlocks[index]}</code></pre>`;
+        });
+
+        // Restore display math
+        formatted = formatted.replace(/__MATHBLOCK_(\d+)__/g, (match, index) => {
+            return `<div class="math-display">\\[${mathBlocks[index]}\\]</div>`;
+        });
+
+        // Restore inline math
+        formatted = formatted.replace(/__INLINEMATH_(\d+)__/g, (match, index) => {
+            return `<span class="math-inline">\\(${inlineMath[index]}\\)</span>`;
+        });
 
         return formatted;
     }
@@ -443,8 +498,18 @@ class App {
                 btn.innerHTML = isVisible
                     ? '<i class="fas fa-eye"></i> Show Answer'
                     : '<i class="fas fa-eye-slash"></i> Hide Answer';
+
+                // Trigger MathJax when answer is shown
+                if (!isVisible && window.MathJax) {
+                    MathJax.typesetPromise([answerEl]).catch((err) => console.log('MathJax error:', err));
+                }
             });
         });
+
+        // Trigger MathJax to render math formulas in questions
+        if (window.MathJax) {
+            MathJax.typesetPromise([container]).catch((err) => console.log('MathJax error:', err));
+        }
     }
 }
 

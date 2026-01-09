@@ -321,10 +321,50 @@ main {
 .note-content ol {
     margin-left: 1.5rem;
     margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.note-content ul {
+    list-style-type: disc;
+}
+
+.note-content ol {
+    list-style-type: decimal;
 }
 
 .note-content li {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.note-content h3,
+.note-content h4 {
+    color: var(--primary-color);
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.note-content h3 {
+    font-size: 1.1rem;
+}
+
+.note-content h4 {
+    font-size: 1rem;
+}
+
+.note-content .math-display {
+    margin: 1rem 0;
+    overflow-x: auto;
+    text-align: center;
+}
+
+.note-content .math-inline {
+    display: inline;
+}
+
+.note-content mjx-container {
+    margin: 0.25rem 0;
 }
 
 .note-topic {
@@ -408,6 +448,38 @@ main {
     border-radius: 0.5rem;
     margin-bottom: 1rem;
     color: var(--text-primary);
+}
+
+.exercise-question h3,
+.exercise-question h4,
+.answer-content h3,
+.answer-content h4 {
+    color: var(--primary-color);
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.exercise-question ul,
+.exercise-question ol,
+.answer-content ul,
+.answer-content ol {
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.exercise-question li,
+.answer-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.exercise-question .math-display,
+.answer-content .math-display {
+    margin: 1rem 0;
+    overflow-x: auto;
+    text-align: center;
 }
 
 .exercise-answer {
