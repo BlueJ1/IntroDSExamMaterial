@@ -46,7 +46,6 @@ class App {
         const slideTopics = dataLoader.getSlideTopics();
         const noteTopics = dataLoader.getNoteTopics();
         const exerciseTopics = dataLoader.getExerciseTopics();
-        const years = dataLoader.getExerciseYears();
 
         // Slides topic filter
         const slidesTopicFilter = document.getElementById('slides-topic-filter');
@@ -64,12 +63,6 @@ class App {
         const exercisesTopicFilter = document.getElementById('exercises-topic-filter');
         exerciseTopics.forEach(topic => {
             exercisesTopicFilter.innerHTML += `<option value="${topic}">${topic}</option>`;
-        });
-
-        // Exercises year filter
-        const exercisesYearFilter = document.getElementById('exercises-year-filter');
-        years.forEach(year => {
-            exercisesYearFilter.innerHTML += `<option value="${year}">${year}</option>`;
         });
     }
 
@@ -110,7 +103,6 @@ class App {
         document.getElementById('slides-topic-filter').addEventListener('change', () => this.applyFilters('slides'));
         document.getElementById('notes-topic-filter').addEventListener('change', () => this.applyFilters('notes'));
         document.getElementById('exercises-topic-filter').addEventListener('change', () => this.applyFilters('exercises'));
-        document.getElementById('exercises-year-filter').addEventListener('change', () => this.applyFilters('exercises'));
 
         // Modal close
         document.querySelector('.close-modal').addEventListener('click', () => {
@@ -284,15 +276,11 @@ class App {
             this.renderNotes(filtered);
         } else if (section === 'exercises') {
             const topic = document.getElementById('exercises-topic-filter').value;
-            const year = document.getElementById('exercises-year-filter').value;
             const query = document.getElementById('exercises-search').value;
 
             let filtered = this.exercises;
             if (topic) {
                 filtered = filtered.filter(e => e.topic === topic);
-            }
-            if (year) {
-                filtered = filtered.filter(e => e.year == year);
             }
             if (query) {
                 const searchResults = fuzzySearch.searchExercises(query);
@@ -469,10 +457,6 @@ class App {
             <div class="exercise-card">
                 <div class="exercise-header">
                     <h4>${exercise.title}</h4>
-                    <div class="exercise-meta">
-                        ${exercise.year ? `<span class="exercise-year">${exercise.year}</span>` : ''}
-                        ${exercise.points ? `<span class="exercise-points">${exercise.points} pts</span>` : ''}
-                    </div>
                 </div>
                 <div class="exercise-question">${this.formatNoteContent(exercise.question)}</div>
                 <div class="exercise-answer">

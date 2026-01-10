@@ -106,14 +106,6 @@ class DataLoader {
         });
         return Array.from(topics).sort();
     }
-
-    getExerciseYears() {
-        const years = new Set();
-        this.exercises.forEach(exercise => {
-            if (exercise.year) years.add(exercise.year);
-        });
-        return Array.from(years).sort((a, b) => b - a);
-    }
 }
 
 // Global instance
