@@ -3,6 +3,8 @@
         {
             "id": "group-assignment-1-exercise-1",
             "title": "Exercise 1, Group Assignment 1: Independence of Complements",
+            "year": 2025,
+            "points": 10,
             "topic": "Probability Theory",
             "question": "Suppose that A and B are independent events, show that $A^{c}$ and $B^{c}$ are independent.",
             "answer": "We want to show that $P(A^c \\cap B^c) = P(A^c)P(B^c)$.\n\nUsing De Morgan's Laws and the properties of probability:\n$$P(A^c \\cap B^c) = P((A \\cup B)^c) = 1 - P(A \\cup B)$$\n\nUsing the inclusion-exclusion principle:\n$$1 - (P(A) + P(B) - P(A \\cap B))$$\n\nSince $A$ and $B$ are independent, $P(A \\cap B) = P(A)P(B)$. Substituting this in:\n$$= 1 - P(A) - P(B) + P(A)P(B)$$\n$$= (1 - P(A)) - P(B)(1 - P(A))$$\n$$= (1 - P(A))(1 - P(B))$$\n$$= P(A^c)P(B^c)$$\n\nThus, $A^c$ and $B^c$ are independent.",
@@ -11,6 +13,8 @@
         {
             "id": "group-assignment-1-exercise-2",
             "title": "Exercise 2, Group Assignment 1: Conditional Probability",
+            "year": 2025,
+            "points": 10,
             "topic": "Probability Theory",
             "question": "The probability that a child has brown hair is $1/4$. Assume independence between children and assume there are three children.\n(a) If it is known that at least one child has brown hair, what is the probability that at least two children have brown hair?\n(b) If it is known that the oldest child has brown hair, what is the probability that at least two children have brown hair?",
             "answer": "**a)** Let $X \\sim \\text{Binomial}(3, 1/4)$. We want to find $P(X \\ge 2 \\mid X \\ge 1)$.\n\n$$P(X \\ge 2 \\mid X \\ge 1) = \\frac{P(X \\ge 2 \\cap X \\ge 1)}{P(X \\ge 1)} = \\frac{P(X \\ge 2)}{P(X \\ge 1)}$$\n\n1. Calculate $P(X \\ge 1) = 1 - P(X=0) = 1 - (3/4)^3 = 1 - 27/64 = 37/64$.\n2. Calculate $P(X \\ge 2) = P(X=2) + P(X=3)$.\n   - $P(X=2) = \\binom{3}{2}(1/4)^2(3/4)^1 = 3 \\cdot (1/16) \\cdot (3/4) = 9/64$\n   - $P(X=3) = (1/4)^3 = 1/64$\n   - Sum = $10/64$\n\nResult: $\\frac{10/64}{37/64} = \\frac{10}{37}$.\n\n**b)** Let $X_1$ be the event the oldest child has brown hair ($X_1=1$). We want $P(\\sum X_i \\ge 2 \\mid X_1=1)$.\n\nGiven $X_1=1$, we need at least 1 more child with brown hair among the remaining 2 children ($X_2, X_3$).\nLet $Y = X_2 + X_3$, where $Y \\sim \\text{Binomial}(2, 1/4)$. We need $P(Y \\ge 1)$.\n\n$$P(Y \\ge 1) = 1 - P(Y=0) = 1 - (3/4)^2 = 1 - 9/16 = 7/16.$$",
@@ -19,6 +23,8 @@
         {
             "id": "group-assignment-1-exercise-3",
             "title": "Exercise 3, Group Assignment 1: Distributions on the Unit Disc",
+            "year": 2025,
+            "points": 10,
             "topic": "Continuous Distributions",
             "question": "Let $(X, Y)$ be uniformly distributed on the unit disc, $\\{(x,y)\\in\\mathbb{R}^{2} \\mid x^{2}+y^{2}\\le1\\}$. Set $R=\\sqrt{X^{2}+Y^{2}}$. What is the CDF and PDF of R?",
             "answer": "**CDF ($F_R(r)$):**\nThe probability $P(R \\le r)$ corresponds to the area of a circle of radius $r$ divided by the total area of the unit disc (radius 1).\n$$F_R(r) = \\frac{\\pi r^2}{\\pi (1)^2} = r^2, \\quad \\text{for } 0 \\le r \\le 1$$\n\n**PDF ($f_R(r)$):**\nThe PDF is the derivative of the CDF with respect to $r$.\n$$f_R(r) = \\frac{d}{dr}(r^2) = 2r, \\quad \\text{for } 0 \\le r \\le 1$$\n\nOutside $[0,1]$, the PDF is 0.",
@@ -27,6 +33,8 @@
         {
             "id": "group-assignment-1-exercise-4",
             "title": "Exercise 4, Group Assignment 1: Expected Value (Geometric Distribution)",
+            "year": 2025,
+            "points": 10,
             "topic": "Expected Value",
             "question": "A fair coin is tossed until a head appears. Let X be the number of tosses required. What is the expected value of X?",
             "answer": "This describes a Geometric distribution where $p = 1/2$. The PMF is $P(X=k) = (1-p)^{k-1}p$.\n\nThe expected value is:\n$$\\mathbb{E}[X] = \\sum_{k=1}^{\\infty} k (1-p)^{k-1} p = p \\sum_{k=1}^{\\infty} k (1-p)^{k-1}$$\n\nUsing the series identity $\\sum_{k=1}^{\\infty} k x^{k-1} = \\frac{1}{(1-x)^2}$ with $x = 1-p$:\n$$\\mathbb{E}[X] = p \\cdot \\frac{1}{(1-(1-p))^2} = p \\cdot \\frac{1}{p^2} = \\frac{1}{p}$$\n\nFor a fair coin, $p = 1/2$, so:\n$$\\mathbb{E}[X] = \\frac{1}{1/2} = 2.$$",
@@ -35,6 +43,8 @@
         {
             "id": "group-assignment-1-exercise-5",
             "title": "Exercise 5, Group Assignment 1: Hoeffding's Inequality",
+            "year": 2025,
+            "points": 15,
             "topic": "Statistical Theory",
             "question": "Let $X_{1},...,X_{n}$ be IID from Bernoulli(p).\n(a) Let $\\alpha>0$ be fixed and define $\\epsilon_{n}=\\sqrt{\\frac{1}{2n}\\log\\frac{2}{\\alpha}}.$ Let $\\hat{p}_{n}=\\frac{1}{n}\\sum_{i=1}^{n}X_{i}$ and define the confidence interval $I_{n}=[\\hat{p}_{n}-\\epsilon_{n}, \\hat{p}_{n}+\\epsilon_{n}]$. Use Hoeffding's inequality to show that $\\mathbb{P}(p\\in I_{n})\\ge 1-\\alpha.$",
             "answer": "From Hoeffding's inequality (Corollary 3.7), for bounded variables $a \\le X_i \\le b$ (here $a=0, b=1$):\n$$\\mathbb{P}(|\\hat{p}_n - \\mathbb{E}[\\hat{p}_n]| \\ge \\epsilon) \\le 2e^{-\\frac{2n\\epsilon^2}{(b-a)^2}}$$\n\nSubstitute $\\epsilon = \\epsilon_n = \\sqrt{\\frac{1}{2n}\\ln\\frac{2}{\\alpha}}$:\n$$\\mathbb{P}(|\\hat{p}_n - p| \\ge \\epsilon_n) \\le 2e^{-2n \\cdot \\frac{1}{2n}\\ln\\frac{2}{\\alpha}} = 2e^{-\\ln\\frac{2}{\\alpha}} = 2 \\cdot \\frac{\\alpha}{2} = \\alpha$$\n\nThe probability that $p$ is *outside* the interval is at most $\\alpha$. Therefore, the probability that $p$ is *inside* the interval is:\n$$\\mathbb{P}(p \\in I_n) = 1 - \\mathbb{P}(|\\hat{p}_n - p| \\ge \\epsilon_n) \\ge 1 - \\alpha$$\n\n(Note: Parts b, c, and d of the original question require simulation code which is not included in the provided theoretical solution).",
@@ -43,6 +53,8 @@
         {
             "id": "group-assignment-2-exercise-1",
             "title": "Exercise 1, Group Assignment 2: Poisson Regression Loss Derivation",
+            "year": 2025,
+            "points": 10,
             "topic": "Supervised Learning",
             "question": "Consider a supervised learning problem where we assume that $Y|X$ is Poisson distributed. That is, the conditional density of $Y|X$ is given by $f_{Y|X}(y,x)=\\frac{\\lambda^{y}e^{-\\lambda}}{y!}$ where $\\lambda(x)=exp(\\alpha\\cdot x+\\beta)$[cite: 27, 28, 29, 30]. [cite_start]Here $\\alpha$ is a vector (slope) and $\\beta$ is a number (intercept)[cite: 31]. [cite_start]Derive a loss that needs to be minimized with respect to $\\alpha$ and $\\beta$[cite: 32].",
             "answer": "**Derivation of the Negative Log-Likelihood:**\n\nGiven the conditional density:\n$$f_{Y|X}(y_i | x_i) = \\frac{\\lambda(x_i)^{y_i} e^{-\\lambda(x_i)}}{y_i!} \\quad , \\quad \\lambda(x) = e^{\\alpha x + \\beta}$$\n\n**1. Likelihood Function:**\n$$\\mathcal{L}(\\alpha, \\beta) = \\prod_{i=1}^{n} f_{Y|X}(y_i | x_i) = \\prod_{i=1}^{n} \\frac{\\lambda(x_i)^{y_i} e^{-\\lambda(x_i)}}{y_i!}$$\n\n**2. Negative Log-Likelihood (Loss Function):**\nWe minimize the negative log-likelihood $R(\\alpha, \\beta) = - \\ln(\\mathcal{L}(\\alpha, \\beta))$:\n\n$$R(\\alpha, \\beta) = - \\sum_{i=1}^{n} \\ln \\left( \\frac{\\lambda(x_i)^{y_i} e^{-\\lambda(x_i)}}{y_i!} \\right)$$\n\nExpanding the log terms:\n$$= - \\sum_{i=1}^{n} \\left[ y_i \\ln(\\lambda(x_i)) + \\ln(e^{-\\lambda(x_i)}) - \\ln(y_i!) \\right]$$\n$$= - \\sum_{i=1}^{n} \\left[ y_i \\ln(\\lambda(x_i)) - \\lambda(x_i) - \\ln(y_i!) \\right]$$\n\nSubstitute $\\lambda(x_i) = e^{\\alpha x_i + \\beta}$:\n$$= - \\sum_{i=1}^{n} y_i (\\alpha x_i + \\beta) + \\sum_{i=1}^{n} e^{\\alpha x_i + \\beta} + \\sum_{i=1}^{n} \\ln(y_i!)$$\n\nSince $\\sum \\ln(y_i!)$ is constant with respect to the parameters $\\alpha$ and $\\beta$, we can discard it for optimization purposes. The final loss function to minimize is:\n\n$$R(\\alpha, \\beta) = \\sum_{i=1}^{n} \\left( e^{\\alpha x_i + \\beta} - y_i(\\alpha x_i + \\beta) \\right)$$",
@@ -51,6 +63,8 @@
         {
             "id": "group-assignment-2-exercise-2",
             "title": "Exercise 2, Group Assignment 2: Estimator Properties (Uniform Distribution)",
+            "year": 2025,
+            "points": 10,
             "topic": "Point Estimation",
             "question": "Let $X_{1},...,X_{n}$ be IID from Uniform(0, $\\theta$). [cite_start]Let $\\hat{\theta}=max(X_{1},...,X_{n})$[cite: 33]. First, find the distribution function of $\\hat{\theta}$. [cite_start]Then compute the bias, standard error (se), and MSE of $\\hat{\theta}$[cite: 33].",
             "answer": "**1. CDF and PDF of $\\hat{\theta}$:**\nFor a Uniform(0, $\\theta$) distribution, the CDF is $F_X(x) = x/\\theta$ for $0 \\le x \\le \\theta$.\nThe estimator is the maximum of $n$ independent variables:\n$$F_{\\hat{\theta}}(x) = P(\\max(X_i) \\le x) = \\prod P(X_i \\le x) = (F_X(x))^n = \\left( \\frac{x}{\\theta} \\right)^n$$\nThe PDF is:\n$$f_{\\hat{\theta}}(x) = \\frac{d}{dx}F_{\\hat{\theta}}(x) = n \\frac{x^{n-1}}{\\theta^n}$$\n\n**2. Bias:**\nFirst, compute the expected value:\n$$\\mathbb{E}[\\hat{\theta}] = \\int_0^{\\theta} x \\cdot n \\frac{x^{n-1}}{\\theta^n} dx = \\frac{n}{\\theta^n} \\left[ \\frac{x^{n+1}}{n+1} \\right]_0^\\theta = \\frac{n}{n+1}\\theta$$\n\n$$\\text{Bias}(\\hat{\theta}) = \\mathbb{E}[\\hat{\theta}] - \\theta = \\frac{n\\theta}{n+1} - \\theta = -\\frac{\\theta}{n+1}$$\n\n**3. Standard Error (se):**\nFirst, compute the variance. We need $\\mathbb{E}[\\hat{\theta}^2]$:\n$$\\mathbb{E}[\\hat{\theta}^2] = \\int_0^{\\theta} x^2 \\cdot n \\frac{x^{n-1}}{\\theta^n} dx = \\frac{n}{n+2}\\theta^2$$\n\n$$\\text{Var}(\\hat{\theta}) = \\mathbb{E}[\\hat{\theta}^2] - (\\mathbb{E}[\\hat{\theta}])^2 = \\frac{n\\theta^2}{n+2} - \\left(\\frac{n\\theta}{n+1}\\right)^2 = \\theta^2 \\frac{n}{(n+2)(n+1)^2}$$\n\n$$\\text{se}(\\hat{\theta}) = \\sqrt{\\text{Var}(\\hat{\theta})} = \\theta \\sqrt{\\frac{n}{(n+2)(n+1)^2}}$$\n\n**4. Mean Squared Error (MSE):**\n$$\\text{MSE}(\\hat{\theta}) = \\text{Bias}^2 + \\text{Var} = \\left( -\\frac{\\theta}{n+1} \\right)^2 + \\frac{n\\theta^2}{(n+2)(n+1)^2}$$\nSimplifying results in:\n$$\\text{MSE}(\\hat{\theta}) = \\frac{2\\theta^2}{(n+1)(n+2)}$$",
@@ -59,6 +73,8 @@
         {
             "id": "group-assignment-2-exercise-3",
             "title": "Exercise 3, Group Assignment 2: Accept-Reject Sampling",
+            "year": 2025,
+            "points": 10,
             "topic": "Sampling Methods",
             "question": "Consider the continuous distribution with density $p(x)=\\frac{1}{2}cos(x)$ for $-\\frac{\\pi}{2}<x<\\frac{\\pi}{2}$ [cite: 34, 35][cite_start].\n(a) Find the distribution function $F$ [cite: 36][cite_start].\n(b) Find the inverse distribution function $F^{-1}$[cite: 37].\n(c) To sample using an Accept-Reject sampler, find a density $g$ such that $p(x)\\le Mg(x)$ for some $M>0$. [cite_start]Find such a density $g$ and the value of $M$[cite: 38].",
             "answer": "**a) Distribution Function $F(x)$:**\n$$F(x) = \\int_{-\\pi/2}^{x} \\frac{1}{2} \\cos(t) dt = \\frac{1}{2} [\\sin(t)]_{-\\pi/2}^{x} = \\frac{1}{2} (\\sin(x) - (-1)) = \\frac{1}{2}\\sin(x) + \\frac{1}{2}$$\n\n**b) Inverse Distribution Function $F^{-1}(u)$:**\nSet $u = \\frac{1}{2}\\sin(x) + \\frac{1}{2}$. Solving for $x$:\n$$2u - 1 = \\sin(x) \\implies x = \\arcsin(2u - 1)$$\nThus, $F^{-1}(u) = \\arcsin(2u - 1)$ for $u \\in (0, 1)$.\n\n**c) Accept-Reject Parameters:**\nThe maximum value of $p(x) = \\frac{1}{2}\\cos(x)$ is $1/2$ (at $x=0$).\nWe can choose a uniform proposal density $g(x)$ over the interval $[-\\pi/2, \\pi/2]$.\n$$g(x) = \\frac{1}{\\pi}$$\n\nWe require $M g(x) \\ge p(x)$. Specifically at the maximum of $p(x)$:\n$$M \\cdot \\frac{1}{\\pi} \\ge \\frac{1}{2} \\implies M \\ge \\frac{\\pi}{2}$$\n\nWe select $M = \\frac{\\pi}{2}$ and $g(x) = \\frac{1}{\\pi}$.",
@@ -67,6 +83,8 @@
         {
             "id": "group-assignment-2-exercise-4",
             "title": "Exercise 4, Group Assignment 2: Markov Chain Transition Matrix",
+            "year": 2025,
+            "points": 10,
             "topic": "Markov Chains",
             "question": "Let $Y_{1},Y_{2},...,Y_{n}$ be a sequence of IID discrete random variables, where $\\mathbb{P}(Y_{i}=0)=0.1$, $\\mathbb{P}(Y_{i}=1)=0.3$, $\\mathbb{P}(Y_{i}=2)=0.2$, and $\\mathbb{P}(Y_{i}=3)=0.4$. Let $X_{n}=max\\{Y_{1},...,Y_{n}\\}$ and $X_0 = 0$. [cite_start]Verify that $X_{0},X_{1},...,X_{n}$ is a Markov chain and find the transition matrix P[cite: 39, 40].",
             "answer": "**Markov Property:**\n$X_{t+1} = \\max(X_t, Y_{t+1})$. Since $Y_{t+1}$ is independent of past history and only the current value $X_t$ is needed to determine the distribution of the new maximum, the process satisfies the Markov property.\n\n**Transition Matrix P:**\nThe state space is $\\{0, 1, 2, 3\\}$. The transition probability is $P_{ij} = P(X_{t+1}=j | X_t=i)$.\nNote that $X_t$ is non-decreasing, so $P_{ij} = 0$ if $j < i$.\n\n* **Row 0 ($X_t=0$):** Max is updated by $Y_{t+1}$. Probabilities follow distribution of $Y$: $[0.1, 0.3, 0.2, 0.4]$.\n* **Row 1 ($X_t=1$):**\n    * Stays 1 if $Y_{t+1} \\le 1$: $P(Y \\le 1) = 0.1 + 0.3 = 0.4$.\n    * Becomes 2 if $Y_{t+1} = 2$: $0.2$.\n    * Becomes 3 if $Y_{t+1} = 3$: $0.4$.\n* **Row 2 ($X_t=2$):**\n    * Stays 2 if $Y_{t+1} \\le 2$: $P(Y \\le 2) = 0.1 + 0.3 + 0.2 = 0.6$.\n    * Becomes 3 if $Y_{t+1} = 3$: $0.4$.\n* **Row 3 ($X_t=3$):**\n    * Stays 3 if $Y_{t+1} \\le 3$: $P(Y \\le 3) = 1.0$.\n\n$$P = \\begin{pmatrix} 0.1 & 0.3 & 0.2 & 0.4 \\\\ 0 & 0.4 & 0.2 & 0.4 \\\\ 0 & 0 & 0.6 & 0.4 \\\\ 0 & 0 & 0 & 1 \\end{pmatrix}$$",
@@ -75,6 +93,8 @@
         {
             "id": "group-assignment-2-exercise-5",
             "title": "Exercise 5, Group Assignment 2: Quantile Confidence Interval",
+            "year": 2025,
+            "points": 10,
             "topic": "Non-parametric Statistics",
             "question": "Let $X_{1},...,X_{n}$ be IID from some distribution F that is unknown[cite: 43]. [cite_start]Let $\\hat{F}_{n}$ be the empirical distribution function, use this to find an estimate of the p quantile of F (call it q)[cite: 44]. [cite_start]Use Theorem 5.28 (DKW Inequality) to find a confidence interval for q[cite: 45].",
             "answer": "**Derivation using DKW Inequality:**\n\nThe DKW inequality states that for any $\\epsilon > 0$:\n$$P(\\sup_x |\\hat{F}_n(x) - F(x)| > \\epsilon) \\le 2e^{-2n\\epsilon^2}$$\n\nTo construct a $(1-\\alpha)$ confidence interval, we set the right-hand side to $\\alpha$ and solve for $\\epsilon$:\n$$2e^{-2n\\epsilon^2} = \\alpha \\implies \\epsilon = \\sqrt{\\frac{\\ln(2/\\alpha)}{2n}}$$\n\nThis gives us a confidence band for the CDF $F(x)$:\n$$P(\\hat{F}_n(x) - \\epsilon < F(x) < \\hat{F}_n(x) + \\epsilon) \\ge 1 - \\alpha$$\n\nTo find the interval for the $p$-quantile $q_p$ (where $F(q_p) = p$), we evaluate the inequality at $x=q_p$:\n$$p - \\epsilon < \\hat{F}_n(q_p) < p + \\epsilon$$\n\nInverting the empirical CDF (which is non-decreasing), we get the confidence interval for the quantile $q_p$:\n$$CI_{1-\\alpha} = \\left[ \\hat{F}_n^{-1}\\left(p - \\sqrt{\\frac{\\ln(2/\\alpha)}{2n}}\\right), \\quad \\hat{F}_n^{-1}\\left(p + \\sqrt{\\frac{\\ln(2/\\alpha)}{2n}}\\right) \\right]$$",
@@ -83,6 +103,8 @@
         {
             "id": "group-assignment-4-exercise-1",
             "title": "Exercise 1, Group Assignment 3: Markov Chain Analysis",
+            "year": 2025,
+            "points": 10,
             "topic": "Markov Chains",
             "question": "Consider a three state (1,2,3) Markov chain with transition matrix $P = \\begin{pmatrix} 0.5 & 0.5 & 0 \\\\ 0.5 & 0 & 0.5 \\\\ 0.5 & 0 & 0.5 \\end{pmatrix}$.\n(a) Draw the transition diagram.\n(b) Find the stationary distribution $\\pi$.\n(c) Calculate $P(X_4 = 2 | X_1 = 1)$.\n(d) Calculate the expected time to reach state 3 starting from state 1.\n(e) What is the period of each state?",
             "answer": "**(a) Transition Diagram**\n\nThe chain consists of three states where:\n- State 1 loops to itself (0.5) and goes to 2 (0.5).\n- State 2 goes to 1 (0.5) and 3 (0.5).\n- State 3 goes to 1 (0.5) and 3 (0.5).\n\n**(b) Stationary Distribution**\nWe solve $\\pi P = \\pi$ under the constraint $\\sum \\pi_i = 1$.\nThis yields the system:\n$$0.5\\pi_1 + 0.5\\pi_2 + 0.5\\pi_3 = \\pi_1$$\n$$0.5\\pi_1 = \\pi_2$$\n$$0.5\\pi_2 + 0.5\\pi_3 = \\pi_3$$\n\nSolving this results in $\\pi = \\begin{pmatrix} 0.5 & 0.25 & 0.25 \\end{pmatrix}$.\n\n**(c) Probability Calculation**\nWe calculate $P^3$ (since $4-1=3$ steps). The square $P^2$ yields rows identical to $\\pi$, indicating the chain reaches stationarity by step 2. Thus $P^3$ also equals the stationary distribution matrix.\nThe entry corresponding to transitioning to state 2 is $0.25$.\n\n**(d) Expected Steps**\nLet $k_i$ be the steps to reach state 3. We have $k_3=0$ and $k_i = 1 + \\sum P_{ij}k_j$.\n- $k_1 = 1 + 0.5k_1 + 0.5k_2$\n- $k_2 = 1 + 0.5k_1$ (since $k_3=0$)\nSolving this system gives $k_1 = 6$.\n\n**(e) Periodicity**\nThe period is the GCD of return path lengths. Since $P_{11} > 0$, $P_{33} > 0$, and paths exist for state 2, the GCD for all states is 1. The chain is aperiodic.",
@@ -91,6 +113,8 @@
         {
             "id": "group-assignment-4-exercise-2",
             "title": "Exercise 2, Group Assignment 3: Classification Cost and Confidence",
+            "year": 2025,
+            "points": 10,
             "topic": "Machine Learning Evaluation",
             "question": "2.1 Write down the empirical version of precision and recall.\n2.2 Define a cost random variable $C$ where cost $c$ is incurred for False Positives and $d$ for False Negatives. Derive the expected cost.\n2.3 Can you produce confidence intervals for the expected cost, precision, and recall?",
             "answer": "**2.1 Empirical Metrics**\n- Precision: $\\frac{\\sum y_i g(x_i)}{\\sum g(x_i)}$ (True Positives / Predicted Positives)\n- Recall: $\\frac{\\sum y_i g(x_i)}{\\sum y_i}$ (True Positives / Actual Positives)\n\n**2.2 Expected Cost**\nThe cost variable is $C = c(1-Y)g(X) + dY(1-g(X))$.\nThe expected cost is derived using conditional probabilities (Precision and Recall):\n$$\\mathbb{E}[C] = c(1 - \\text{Precision})\\mathbb{P}(g(X)=1) + d(1 - \\text{Recall})\\mathbb{P}(Y=1)$$\n\n**2.3 Confidence Intervals**\nYes, intervals can be produced using the Central Limit Theorem (CLT) and properties of binomial proportions.\n- **Expected Cost:** Use the sample mean $\\bar{C}$ and standard error $s_C/\\sqrt{n}$ to form $\\bar{C} \\pm z_{\\alpha/2} \\frac{s_C}{\\sqrt{n}}$.\n- **Precision/Recall:** Treat as binomial proportions. For Precision, the interval is $\\hat{P} \\pm z_{\\alpha/2} \\sqrt{\\frac{\\hat{P}(1 - \\hat{P})}{N_{pred}}}$. Similarly for Recall using $N_{pos}$.",
@@ -99,6 +123,8 @@
         {
             "id": "group-assignment-4-exercise-3",
             "title": "Exercise 3, Group Assignment 3: High-Dimensional Orthogonality",
+            "year": 2025,
+            "points": 10,
             "topic": "High-Dimensional Geometry",
             "question": "Let X and Y be two d-dimensional zero mean, unit variance Gaussian random vectors.\n(a) Show that X and Y are nearly orthogonal by calculating their dot product statistics.\n(b) Bound the probability that the dot product is larger than $\\epsilon$.",
             "answer": "**(a) Near Orthogonality**\nThe dot product $Z = X \\cdot Y = \\sum X_i Y_i$.\n- Expectation: $\\mathbb{E}[Z] = 0$ (due to independence and zero mean).\n- Variance: $\\text{Var}(Z) = d$.\n- Cosine Angle: $\\cos \\theta \\approx \\frac{\\sqrt{d}}{\\sqrt{d}\\sqrt{d}} = \\frac{1}{\\sqrt{d}}$. As $d \\to \\infty$, the angle approaches $90^\\circ$ (orthogonality).\n\n**(b) Probability Bound**\nUsing Chebyshev's inequality for $Z$ (mean 0, variance $d$):\n$$P(|X \\cdot Y| \\ge \\epsilon) \\le \\frac{d}{\\epsilon^2}$$\nThis demonstrates that for large $\\epsilon$, the probability of significant non-orthogonality is low.",
@@ -107,6 +133,8 @@
         {
             "id": "group-assignment-4-exercise-4",
             "title": "Exercise 4, Group Assignment 3: Rank and SVD",
+            "year": 2025,
+            "points": 10,
             "topic": "Linear Algebra",
             "question": "Let $u_1, ..., u_r$ be linearly independent unit vectors.\n(a) Verify the rank and null-space of $u_i u_i^T$.\n(b) Verify the rank of $U = \\sum u_i u_i^T$.\n(c) Are $u_i$ always the right singular vectors of $U$? Check with an example.",
             "answer": "**(a) Rank and Null-space**\n- Rank: The matrix $u_i u_i^T$ has rank 1 because every column is a scalar multiple of $u_i$.\n- Null-space: The set of vectors orthogonal to $u_i$ (dimension $n-1$).\n\n**(b) Rank of Sum**\nSince the vectors are linearly independent, the sum $U$ has rank $r$. The null space is the orthogonal complement of the span of $\\{u_1, ..., u_r\\}$.\n\n**(c) SVD Relationship**\n- **General Case:** No. A counter-example with non-orthogonal vectors (e.g., separated by $30^\\circ$) shows the singular vectors differ from the original $u_i$ vectors.\n- **Orthogonal Case:** If $u_i$ are orthogonal, then $U$ is diagonal (or block diagonal) in that basis, and the singular values are 1. In this specific case, they align.",
@@ -115,6 +143,8 @@
         {
             "id": "group-assignment-4-exercise-5",
             "title": "Exercise 5, Group Assignment 3: Distribution on the Unit Ball",
+            "year": 2025,
+            "points": 10,
             "topic": "Multivariate Distributions",
             "question": "Let $X \\sim \\text{Uniform}(B_1)$ and define $Y = ||X||_2$.\n(a) Find the distribution function of Y.\n(b) What is the distribution of $\\ln(1/Y)$?\n(c) Calculate $\\mathbb{E}[\\ln(1/Y)]$.",
             "answer": "**(a) CDF of Y**\nThe probability $P(Y \\le y)$ is the ratio of the volume of a ball of radius $y$ to the unit ball.\n$$F_Y(y) = \\frac{C y^d}{C} = y^d, \\quad \\text{for } 0 \\le y \\le 1$$\n\n**(b) Distribution of Transformed Variable**\nLet $Z = \\ln(1/Y)$.\n$$F_Z(z) = P(\\ln(1/Y) \\le z) = P(Y \\ge e^{-z}) = 1 - F_Y(e^{-z})$$\n$$= 1 - (e^{-z})^d = 1 - e^{-dz}$$\nThis is the CDF of an **Exponential distribution** with rate parameter $\\lambda = d$.\n\n**(c) Expectation**\nSince $Z \\sim \\text{Exp}(d)$, the expected value is:\n$$\\mathbb{E}[Z] = \\frac{1}{d}$$",
