@@ -1,6 +1,6 @@
 # Intro DS Exam Prep Website
 
-A static website for exam preparation that can be hosted on GitHub Pages. Features PDF lecture slides, notes, and past exam questions with fuzzy search capability.
+A static website for exam preparation that can be hosted on GitHub Pages. Features HTML lecture slides, notes, and exercises with fuzzy search capability and MathJax support for mathematical notation.
 
 ## 🚀 Quick Start
 
@@ -36,27 +36,33 @@ IntroDSExamMaterial/
 ├── data/
 │   ├── slides.json        # Lecture slides metadata
 │   ├── notes.json         # Notes content
-│   └── exams.json         # Past exam questions & answers
-├── slides/                 # PDF files go here
-│   └── *.pdf
+│   └── exercises.json     # Exercises with questions & answers
+├── slides/                 # HTML slide files go here
+│   └── *.html
+├── assets/                 # Images and other assets
+│   └── *.png
+├── past_exams/            # Past exam notebooks and solutions
+│   ├── *.ipynb
+│   ├── *.py
+│   └── data/              # Data files for exams
 └── README.md
 ```
 
 ## 📚 Adding Content
 
-### Adding Lecture Slides (PDFs)
+### Adding Lecture Slides (HTML)
 
-1. Place your PDF files in the `slides/` directory
+1. Place your HTML slide files in the `slides/` directory
 2. Update `data/slides.json` with the metadata:
 
 ```json
 {
-    "id": "slide-6",
-    "title": "Lecture 6 - Classification",
-    "description": "Logistic regression, decision trees, SVM, evaluation metrics",
-    "topic": "Machine Learning",
-    "pdfPath": "slides/lecture-06-classification.pdf",
-    "keywords": ["classification", "logistic regression", "decision tree", "SVM"]
+    "id": "slide-06",
+    "title": "Lecture 06 - Fundamentals of Estimation",
+    "description": "Introduction to estimation theory, bias, variance, MSE",
+    "topic": "Estimation",
+    "slidePath": "slides/06-Fundamentals_of_estimation.html",
+    "keywords": ["estimation", "bias", "variance", "MSE", "estimator"]
 }
 ```
 
@@ -80,23 +86,26 @@ Edit `data/notes.json` to add new notes:
 - `` `code` `` for inline code
 - Triple backticks for code blocks
 - Newlines (`\n`) for line breaks
+- LaTeX math: `$inline$` and `$$display$$`
 
-### Adding Exam Questions
+### Adding Exercises
 
-Edit `data/exams.json` to add past exam questions:
+Edit `data/exercises.json` to add exercises with questions and answers:
 
 ```json
 {
-    "id": "exam-6",
-    "title": "Question 6: Decision Tree Splitting",
-    "year": 2024,
-    "points": 10,
-    "topic": "Machine Learning",
-    "question": "Explain how a decision tree chooses the best feature to split on. Compare information gain and Gini impurity.",
-    "answer": "**Decision trees split on features that maximize information gain or minimize Gini impurity...**\n\n**Information Gain:**\n- Based on entropy...",
-    "keywords": ["decision tree", "information gain", "Gini", "entropy", "splitting"]
+    "id": "exercise-1",
+    "title": "Exercise 1: Independence of Complements",
+    "topic": "Probability Theory",
+    "question": "Suppose that A and B are independent events, show that $A^{c}$ and $B^{c}$ are independent.",
+    "answer": "We want to show that $P(A^c \\cap B^c) = P(A^c)P(B^c)$...",
+    "keywords": ["independence", "probability", "complements", "proof"]
 }
 ```
+
+**Math Support:**
+- Inline math: `$x^2 + y^2 = 1$`
+- Display math: `$$\\sum_{i=1}^{n} x_i$$`
 
 ## 🔍 Search Features
 
@@ -108,7 +117,7 @@ The website uses **Fuse.js** for fuzzy search, which means:
 ### Search Tips:
 - Use the global search bar in the header to search everything
 - Use section-specific search boxes to filter within that section
-- Combine search with dropdown filters for precise results
+- Combine search with topic filters for precise results
 
 ## 🎨 Customization
 
@@ -127,17 +136,19 @@ Edit the CSS variables in `css/style.css`:
 
 ### Adding New Topics
 
-Topics are automatically extracted from your content. Just add a new topic value to any slide, note, or exam question, and it will appear in the filter dropdowns.
+Topics are automatically extracted from your content. Just add a new topic value to any slide, note, or exercise, and it will appear in the filter dropdowns.
 
 ## 📱 Features
 
 - ✅ Responsive design (works on mobile)
-- ✅ PDF viewer modal for lecture slides
+- ✅ HTML slide viewer modal for lecture slides
+- ✅ MathJax support for LaTeX mathematical notation
 - ✅ Fuzzy search across all content
-- ✅ Topic and year filters
-- ✅ Show/hide answers for exam questions
+- ✅ Topic filters for all sections
+- ✅ Show/hide answers for exercises
 - ✅ Dashboard with content counts
 - ✅ Keyboard shortcuts (Escape to close modals)
+- ✅ Code syntax highlighting in notes and answers
 
 ## 🔧 Local Development
 
@@ -165,7 +176,7 @@ Then open `http://localhost:8000` in your browser.
     "title": "string",
     "description": "string",
     "topic": "string",
-    "pdfPath": "string (path to PDF)",
+    "slidePath": "string (path to HTML slide file)",
     "keywords": ["array", "of", "strings"]
 }
 ```
@@ -176,21 +187,19 @@ Then open `http://localhost:8000` in your browser.
     "id": "string (unique)",
     "title": "string",
     "topic": "string",
-    "content": "string (supports markdown-like formatting)",
+    "content": "string (supports markdown-like formatting and LaTeX)",
     "keywords": ["array", "of", "strings"]
 }
 ```
 
-### Exam Question Object
+### Exercise Object
 ```json
 {
     "id": "string (unique)",
     "title": "string",
-    "year": "number",
-    "points": "number",
     "topic": "string",
-    "question": "string",
-    "answer": "string",
+    "question": "string (supports LaTeX math)",
+    "answer": "string (supports LaTeX math)",
     "keywords": ["array", "of", "strings"]
 }
 ```
@@ -199,12 +208,11 @@ Then open `http://localhost:8000` in your browser.
 
 This tool is designed to help you quickly access and search through your study materials during an open-internet exam. Make sure to:
 
-1. Add all your lecture PDFs
+1. Add all your lecture slides
 2. Add comprehensive notes with relevant keywords
-3. Include past exam questions for practice
+3. Include exercises for practice
 4. Test the search functionality before your exam
 
 ---
 
 Built with ❤️ for exam success
-
