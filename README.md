@@ -1,6 +1,6 @@
 # Intro DS Exam Prep Website
 
-A static website for exam preparation that can be hosted on GitHub Pages. Features HTML lecture slides, notes, and exercises with fuzzy search capability and MathJax support for mathematical notation.
+A static website for exam preparation that can be hosted on GitHub Pages: https://bluej1.github.io/IntroDSExamMaterial/. Features HTML lecture slides, notes, and exercises with fuzzy search capability and MathJax support for mathematical notation.
 
 ## 🚀 Quick Start
 

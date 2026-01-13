@@ -350,7 +350,18 @@ the tuple being the SMS text and the second being a flag `0 = not spam` and `1 =
 """
 
 # Run this cell to get the SMS text data
-from exam_extras import load_sms
+def load_sms():
+    """Load SMS spam/no spam data."""
+    import pandas as pd
+    df = pd.read_csv('data/spam.csv', encoding='latin-1')
+    data = []
+    for _, row in df.iterrows():
+        label = 1 if row['v1'] == 'spam' else 0
+        text = row['v2']
+        data.append((text, label))
+
+    return data
+
 spam_no_spam = load_sms()
 
 # Part 1: Estimate P(Y = 1 | "free" or "prize" is in X)
@@ -510,12 +521,14 @@ for _ in range(1000):
 
 # This should be a numpy array of length n_cities which sums to 1 and is all positive
 stationary_distribution_problem5 = stationary
+print(f'stationary_distribution_problem5: {stationary_distribution_problem5}')
 
 # Compute the return probability for part 4 of problem 5
 # P(X_3 = Aracaju | X_0 = Aracaju) = (P^3)[Aracaju, Aracaju]
 aracaju_idx = cityToIndex.get('Aracaju (SE)', 0)
 P3 = np.linalg.matrix_power(transition_matrix, 3)
 return_probability_problem5 = P3[aracaju_idx, aracaju_idx]
+print(f'return_probability_problem5: {return_probability_problem5}')
 
 # Local Test for Exam vB, PROBLEM 5
 # Once you have created all your functions, you can make a small test here to see
@@ -611,7 +624,8 @@ total_data = len(X_problem6)
 vc_dim = 3
 delta = 0.05
 problem6_VC_l = sqrt((1/total_data) * (vc_dim * log(2 * e * total_data / vc_dim) + log(4 / delta)))
+print(f'problem6_VC_l: {problem6_VC_l}')
 
 # Answer True if VC interval is smaller than test accuracy interval, else False
 problem6_VC_smaller = problem6_VC_l < problem6_accuracy_l
-
+print(f'problem6_VC_smaller: {problem6_VC_smaller}')
